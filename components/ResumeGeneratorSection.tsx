@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Download, FileText, ImageDown, RotateCcw } from 'lucide-react';
+import { FileText, ImageDown, RotateCcw } from 'lucide-react';
 import { CONTACT_DATA } from '../src/data/contact';
 import { Language } from '../types';
 
@@ -7,18 +7,12 @@ interface ResumeGeneratorSectionProps {
   language: Language;
 }
 
-type Ability = 'graphic' | 'photo' | 'video' | 'interior' | 'integrated';
-type ResumeFormat = 'pdf' | 'image' | 'both';
+type Ability = 'graphic' | 'photo' | 'video' | 'interior' | 'personal';
 
 interface FormState {
-  company: string;
-  role: string;
   ability: Ability;
+  role: string;
   salary: string;
-  city: string;
-  startTime: string;
-  format: ResumeFormat;
-  message: string;
 }
 
 const abilityOptions: Array<{ id: Ability; zh: string; en: string }> = [
@@ -26,19 +20,13 @@ const abilityOptions: Array<{ id: Ability; zh: string; en: string }> = [
   { id: 'photo', zh: '摄影摄像 / 静态影像', en: 'Photography / Still Image' },
   { id: 'video', zh: '视频剪辑 / 拍摄', en: 'Video Editing / Shooting' },
   { id: 'interior', zh: '室内设计 / 环艺', en: 'Interior / Environmental Design' },
-  { id: 'integrated', zh: '综合视觉内容能力', en: 'Integrated Visual Content' },
-];
-
-const formatOptions: Array<{ id: ResumeFormat; zh: string; en: string }> = [
-  { id: 'pdf', zh: 'PDF 简历', en: 'PDF Resume' },
-  { id: 'image', zh: '图片简历', en: 'Image Resume' },
-  { id: 'both', zh: '都需要', en: 'Both' },
+  { id: 'personal', zh: '个人综合能力', en: 'Personal General Ability' },
 ];
 
 const abilityProfiles: Record<Ability, { title: string; summary: string; highlights: string[]; works: string[] }> = {
   graphic: {
     title: '平面设计 / UI 视觉方向',
-    summary: '适合需要品牌视觉、信息图表、界面视觉与作品集排版能力的设计岗位。',
+    summary: '适合需要品牌视觉、信息图表、界面视觉、作品集排版与基础页面落地能力的设计岗位。',
     highlights: ['Adobe Photoshop / Illustrator / Lightroom', 'Figma 与 AI Web 设计', '信息整理、视觉传播与版式表达', '前端页面实现基础'],
     works: ['平面交互作品', '摄影集 PDF', '电影信息图表设计'],
   },
@@ -60,23 +48,18 @@ const abilityProfiles: Record<Ability, { title: string; summary: string; highlig
     highlights: ['AutoCAD / SketchUp / 3ds Max', 'Blender / Lumion / D5 Render', '空间规划与室内设计表达', '建模与渲染表现'],
     works: ['创意办公空间项目', '南京爻石博物馆数字展厅', '环境 / 室内设计作品集'],
   },
-  integrated: {
-    title: '综合视觉内容方向',
-    summary: '适合同时需要影像、平面、空间表达与基础网页落地能力的综合内容岗位。',
-    highlights: ['摄影、视频、平面、空间多方向协作', '视觉传播与信息整理', '内容策划与作品集整理', '前端页面实现'],
+  personal: {
+    title: '个人综合能力方向',
+    summary: '适合岗位不完全对口时，快速了解个人基础素质、学习能力、视觉表达、内容整理与跨方向协作能力。',
+    highlights: ['学习能力与信息整理', '视觉审美与内容表达', '摄影、视频、平面、空间的综合经验', '基础前端页面实现与作品集管理'],
     works: ['个人作品网站', '摄影集 PDF', '毕业短片《破茧》', '环境 / 室内设计作品'],
   },
 };
 
 const initialForm: FormState = {
-  company: '',
-  role: '',
   ability: 'graphic',
+  role: '',
   salary: '',
-  city: '',
-  startTime: '',
-  format: 'both',
-  message: '',
 };
 
 const label = (language: Language, zh: string, en: string) => (language === 'zh' ? zh : en);
@@ -90,7 +73,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
     setForm((current) => ({ ...current, [key]: value }));
   };
 
-  const fileBaseName = `zhuoran-song-resume-${form.company || form.role || selectedAbility.title}`.replace(/[\\/:*?"<>|\s]+/g, '-').toLowerCase();
+  const fileBaseName = `zhuoran-song-resume-${form.role || selectedAbility.title}`.replace(/[\\/:*?"<>|\s]+/g, '-').toLowerCase();
 
   const downloadImage = async () => {
     const target = document.getElementById('resume-preview-card');
@@ -164,7 +147,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
         <section className="border-t-2 border-black pt-6 dark:border-white">
           <div className="mb-8">
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-gray-500">
-              {label(language, 'Interview Archive Tool', 'Interview Archive Tool')}
+              Interview Archive Tool
             </p>
             <h2 className="mt-3 text-4xl font-black leading-none tracking-[-0.04em] text-black dark:text-white md:text-6xl">
               {label(language, '简历生成问卷', 'Resume Generator')}
@@ -172,14 +155,14 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-500 dark:text-gray-400">
               {label(
                 language,
-                '请面试方根据岗位需求填写几个问题，页面会自动生成一份适配该方向的简历卡片，可下载图片或通过打印保存为 PDF。',
-                'Answer a few hiring questions and generate a tailored resume card for download or PDF printing.'
+                '选择面试方最关注的能力方向，并填写岗位与薪资信息，页面会自动生成一份可下载的简历卡片。',
+                'Select the role focus and fill in role and salary information to generate a downloadable resume card.'
               )}
             </p>
           </div>
 
           <div className="space-y-7">
-            <Question title={label(language, '1. 你看中了我的哪方面能力？', '1. Which ability are you interested in?')}>
+            <Question title={label(language, '1. 需要哪方面能力？', '1. Which ability is needed?')}>
               <div className="grid gap-3 sm:grid-cols-2">
                 {abilityOptions.map((option) => (
                   <button
@@ -198,47 +181,12 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
               </div>
             </Question>
 
-            <Question title={label(language, '2. 面试公司和岗位是什么？', '2. Company and role')}>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <TextInput value={form.company} placeholder={label(language, '公司名称', 'Company')} onChange={(value) => updateForm('company', value)} />
-                <TextInput value={form.role} placeholder={label(language, '岗位名称', 'Role')} onChange={(value) => updateForm('role', value)} />
-              </div>
+            <Question title={label(language, '2. 面试的岗位是什么？', '2. What role is this interview for?')}>
+              <TextInput value={form.role} placeholder={label(language, '岗位名称', 'Role title')} onChange={(value) => updateForm('role', value)} />
             </Question>
 
-            <Question title={label(language, '3. 这次面试的基础条件', '3. Interview conditions')}>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <TextInput value={form.salary} placeholder={label(language, '期望薪资', 'Expected salary')} onChange={(value) => updateForm('salary', value)} />
-                <TextInput value={form.city} placeholder={label(language, '工作城市', 'City')} onChange={(value) => updateForm('city', value)} />
-                <TextInput value={form.startTime} placeholder={label(language, '到岗时间', 'Start date')} onChange={(value) => updateForm('startTime', value)} />
-              </div>
-            </Question>
-
-            <Question title={label(language, '4. 希望导出什么格式？', '4. Export format')}>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {formatOptions.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => updateForm('format', option.id)}
-                    className={`border px-4 py-3 text-left text-sm font-bold transition-colors ${
-                      form.format === option.id
-                        ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
-                        : 'border-gray-200 text-gray-500 hover:border-black hover:text-black dark:border-gray-800 dark:text-gray-400 dark:hover:border-white dark:hover:text-white'
-                    }`}
-                  >
-                    {label(language, option.zh, option.en)}
-                  </button>
-                ))}
-              </div>
-            </Question>
-
-            <Question title={label(language, '5. 还有什么想补充？', '5. Additional note')}>
-              <textarea
-                value={form.message}
-                onChange={(event) => updateForm('message', event.target.value)}
-                placeholder={label(language, '例如：更关注作品集、实习周期、是否可线下面试……', 'Portfolio focus, internship period, onsite interview, etc.')}
-                className="min-h-28 w-full resize-y border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-black dark:border-gray-800 dark:focus:border-white"
-              />
+            <Question title={label(language, '3. 薪资范围或预算是多少？', '3. What salary range or budget?')}>
+              <TextInput value={form.salary} placeholder={label(language, '期望薪资 / 面议 / 预算范围', 'Expected salary / Negotiable / Budget')} onChange={(value) => updateForm('salary', value)} />
             </Question>
           </div>
         </section>
@@ -319,20 +267,19 @@ const ResumeCard = ({
     <section className="grid gap-5 border-b border-black/25 py-5 md:grid-cols-[1fr_0.85fr]">
       <div>
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-black/50">
-          {form.company || label(language, '目标公司待填写', 'Target company')}
+          {selectedAbility.title}
         </p>
         <h4 className="mt-2 text-2xl font-black leading-tight md:text-3xl">
-          {form.role || selectedAbility.title}
+          {form.role || label(language, '面试岗位待填写', 'Interview role pending')}
         </h4>
         <p className="mt-4 text-sm leading-relaxed text-black/70">
           {selectedAbility.summary}
         </p>
       </div>
       <dl className="grid content-start gap-2 font-mono text-xs uppercase tracking-[0.08em] text-black/65">
-        <InfoRow label={label(language, '方向', 'Focus')} value={selectedAbility.title} />
+        <InfoRow label={label(language, '能力', 'Ability')} value={selectedAbility.title} />
+        <InfoRow label={label(language, '岗位', 'Role')} value={form.role || label(language, '待填写', 'Pending')} />
         <InfoRow label={label(language, '薪资', 'Salary')} value={form.salary || label(language, '面议', 'Negotiable')} />
-        <InfoRow label={label(language, '城市', 'City')} value={form.city || label(language, '可沟通', 'Open')} />
-        <InfoRow label={label(language, '到岗', 'Start')} value={form.startTime || label(language, '按需沟通', 'Discuss')} />
       </dl>
     </section>
 
@@ -361,15 +308,6 @@ const ResumeCard = ({
         </ul>
       </div>
     </section>
-
-    {form.message && (
-      <section className="border-b border-black/25 py-5">
-        <h5 className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-black/50">
-          {label(language, '面试备注', 'Interview Note')}
-        </h5>
-        <p className="text-sm leading-relaxed text-black/70">{form.message}</p>
-      </section>
-    )}
 
     <footer className="flex flex-col justify-between gap-3 pt-5 font-mono text-xs uppercase tracking-[0.08em] text-black/58 md:flex-row">
       <span>{contactEmail}</span>
