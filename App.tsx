@@ -3,11 +3,11 @@ import Matter from 'matter-js';
 import { Sidebar } from './components/Sidebar';
 import { HeroSection } from './components/HeroSection';
 import { PortfolioSection } from './components/PortfolioSection';
-import { ArticleSection } from './components/ArticleSection';
+import { ResumeGeneratorSection } from './components/ResumeGeneratorSection';
 import { TimelineSection } from './components/TimelineSection';
 import { Mail, RotateCcw, MessageSquare } from 'lucide-react';
 import { CONTACT_DATA } from './src/data/contact';
-import { ARTICLES_PAGE_DATA } from './src/data/articles';
+import { ARCHIVES_PAGE_DATA } from './src/data/archives';
 import { PORTFOLIO_PAGE_DATA } from './src/data/portfolioPage';
 import { Language, Category } from './types';
 
@@ -396,13 +396,13 @@ function App() {
           <div className="pt-20 w-full max-w-[96vw] mx-auto">
              <div className="mb-24 flex flex-col items-center text-center">
                <h1 className="text-[8vw] leading-none font-black mb-8 text-black dark:text-white transition-colors duration-300">
-                 {ARTICLES_PAGE_DATA[language].title}
+                 {ARCHIVES_PAGE_DATA[language].title}
                </h1>
                <p className="text-2xl text-gray-500 dark:text-gray-400 max-w-2xl font-medium transition-colors duration-300">
-                 {ARTICLES_PAGE_DATA[language].description}
+                 {ARCHIVES_PAGE_DATA[language].description}
                </p>
              </div>
-             <ArticleSection language={language} />
+             <ResumeGeneratorSection language={language} />
           </div>
         );
       case 'about':
