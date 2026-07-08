@@ -231,6 +231,8 @@ const resumeBase = {
 
 export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ language }) => {
   const [form, setForm] = useState<FormState>(initialForm);
+  const [step, setStep] = useState(1);
+  const [isGenerated, setIsGenerated] = useState(false);
   const contact = CONTACT_DATA[language];
   const selectedAbility = useMemo(() => abilityProfiles[form.ability], [form.ability]);
   const resolvedRole = form.role || selectedAbility.defaultRole;
@@ -238,6 +240,13 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
 
   const updateForm = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((current) => ({ ...current, [key]: value }));
+    setIsGenerated(false);
+  };
+
+  const resetWizard = () => {
+    setForm(initialForm);
+    setStep(1);
+    setIsGenerated(false);
   };
 
   const fileBaseName = `zhuoran-song-resume-${resolvedRole}`.replace(/[\\/:*?"<>|\s]+/g, '-').toLowerCase();
@@ -328,14 +337,23 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
             </p>
           </div>
 
-          <div className="space-y-7">
-            <Question title={label(language, '1. 需要哪方面能力？', '1. Which ability is needed?')}>
+          <div className="mb-6 flex items-center justify-between border-y border-black/20 py-3 font-mono text-xs uppercase tracking-[0.18em] text-gray-500 dark:border-white/20">
+            <span>{label(language, `问题 ${step}-3`, `Question ${step}-3`)}</span>
+            <span>{label(language, '共 3 个问题', '3 questions')}</span>
+          </div>
+
+          <div className="min-h-[24rem]">
+            {step === 1 && (
+              <Question title={label(language, '1. 需要哪方面能力？', '1. Which ability is needed?')}>
               <div className="grid gap-3 sm:grid-cols-2">
                 {abilityOptions.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    onClick={() => updateForm('ability', option.id)}
+                    onClick={() => {
+                      updateForm('ability', option.id);
+                      setStep(2);
+                    }}
                     className={`border px-4 py-3 text-left text-sm font-bold transition-colors ${
                       form.ability === option.id
                         ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
@@ -346,42 +364,80 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
                   </button>
                 ))}
               </div>
-            </Question>
+              </Question>
+            )}
 
-            <Question title={label(language, '2. 面试的岗位是什么？', '2. What role is this interview for?')}>
-              <TextInput value={form.role} placeholder={selectedAbility.defaultRole} onChange={(value) => updateForm('role', value)} />
-            </Question>
+            {step === 2 && (
+              <Question title={label(language, '2. 面试的岗位是什么？', '2. What role is this interview for?')}>
+                <TextInput value={form.role} placeholder={selectedAbility.defaultRole} onChange={(value) => updateForm('role', value)} />
+                <div className="mt-5 flex gap-3">
+                  <button type="button" onClick={() => setStep(1)} className="border border-gray-200 px-5 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
+                    {label(language, '上一题', 'Back')}
+                  </button>
+                  <button type="button" onClick={() => setStep(3)} className="bg-black px-5 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
+                    {label(language, '下一题', 'Next')}
+                  </button>
+                </div>
+              </Question>
+            )}
 
-            <Question title={label(language, '3. 薪资范围或预算是多少？', '3. What salary range or budget?')}>
-              <TextInput value={form.salary} placeholder={label(language, '期望薪资 / 面议 / 预算范围', 'Expected salary / Negotiable / Budget')} onChange={(value) => updateForm('salary', value)} />
-            </Question>
+            {step === 3 && (
+              <Question title={label(language, '3. 薪资范围或预算是多少？', '3. What salary range or budget?')}>
+                <TextInput value={form.salary} placeholder={label(language, '期望薪资 / 面议 / 预算范围', 'Expected salary / Negotiable / Budget')} onChange={(value) => updateForm('salary', value)} />
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <button type="button" onClick={() => setStep(2)} className="border border-gray-200 px-5 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
+                    {label(language, '上一题', 'Back')}
+                  </button>
+                  <button type="button" onClick={() => setIsGenerated(true)} className="bg-black px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
+                    {label(language, '确认生成简历', 'Generate Resume')}
+                  </button>
+                </div>
+              </Question>
+            )}
           </div>
         </section>
 
         <section>
-          <ResumeCard
-            language={language}
-            form={form}
-            contactEmail={contact.email}
-            selectedAbility={selectedAbility}
-            role={resolvedRole}
-            salary={resolvedSalary}
-          />
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            <button onClick={downloadImage} className="inline-flex items-center justify-center gap-2 bg-black px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
-              <ImageDown size={18} />
-              {label(language, '下载图片', 'PNG')}
-            </button>
-            <button onClick={printPdf} className="inline-flex items-center justify-center gap-2 border border-black px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
-              <FileText size={18} />
-              {label(language, '保存 PDF', 'PDF')}
-            </button>
-            <button onClick={() => setForm(initialForm)} className="inline-flex items-center justify-center gap-2 border border-gray-200 px-4 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
-              <RotateCcw size={18} />
-              {label(language, '重置', 'Reset')}
-            </button>
-          </div>
+          {!isGenerated ? (
+            <div className="grid min-h-[34rem] place-items-center border border-dashed border-gray-300 bg-gray-50/70 p-8 text-center dark:border-gray-800 dark:bg-white/5">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-gray-400">
+                  Resume Locked
+                </p>
+                <h3 className="mt-4 text-3xl font-black text-black dark:text-white">
+                  {label(language, '完成 3 个问题后生成完整简历', 'Complete 3 questions to generate the resume')}
+                </h3>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-500">
+                  {label(language, '当前不会展示详细简历内容。确认生成后，这里会显示定制简历和对应岗位 JD。', 'Detailed resume content is hidden until confirmation.')}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="mb-4 flex flex-wrap justify-end gap-3">
+                <button onClick={downloadImage} className="inline-flex items-center justify-center gap-2 bg-black px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
+                  <ImageDown size={18} />
+                  {label(language, '保存为图片', 'Save Image')}
+                </button>
+                <button onClick={printPdf} className="inline-flex items-center justify-center gap-2 border border-black px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
+                  <FileText size={18} />
+                  {label(language, '保存为 PDF', 'Save PDF')}
+                </button>
+                <button onClick={resetWizard} className="inline-flex items-center justify-center gap-2 border border-gray-200 px-4 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
+                  <RotateCcw size={18} />
+                  {label(language, '重置', 'Reset')}
+                </button>
+              </div>
+              <ResumeCard
+                language={language}
+                form={form}
+                contactEmail={contact.email}
+                selectedAbility={selectedAbility}
+                role={resolvedRole}
+                salary={resolvedSalary}
+              />
+            </div>
+          )}
         </section>
       </div>
     </div>
