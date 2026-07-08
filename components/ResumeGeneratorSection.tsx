@@ -446,7 +446,9 @@ const WizardActions = ({ children }: { children: React.ReactNode }) => (
 );
 
 const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
+  const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ active: false, moved: false, startY: 0, startScrollTop: 0 });
+  const scrollTimerRef = useRef<number | null>(null);
 
   const snapToNearest = (element: HTMLDivElement) => {
     const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(element.scrollTop / 48)));
@@ -461,8 +463,12 @@ const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: str
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-white to-white/0 dark:from-black" />
         <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-10 h-12 -translate-y-1/2 border-y border-black/15 dark:border-white/15" />
         <div
-          className="h-full cursor-grab select-none snap-y snap-mandatory overflow-y-auto py-20 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={`h-full cursor-grab select-none overflow-y-auto py-20 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+            isDragging ? '' : 'snap-y snap-mandatory scroll-smooth'
+          }`}
           onPointerDown={(event) => {
+            if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
+            setIsDragging(true);
             dragRef.current = {
               active: true,
               moved: false,
@@ -479,16 +485,23 @@ const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: str
           }}
           onPointerUp={(event) => {
             dragRef.current.active = false;
+            setIsDragging(false);
             event.currentTarget.releasePointerCapture(event.pointerId);
             snapToNearest(event.currentTarget);
           }}
           onPointerCancel={(event) => {
             dragRef.current.active = false;
+            setIsDragging(false);
             snapToNearest(event.currentTarget);
           }}
           onScroll={(event) => {
             const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(event.currentTarget.scrollTop / 48)));
             onChange(salaryOptions[index]);
+            if (!dragRef.current.active) {
+              if (scrollTimerRef.current) window.clearTimeout(scrollTimerRef.current);
+              const target = event.currentTarget;
+              scrollTimerRef.current = window.setTimeout(() => snapToNearest(target), 120);
+            }
           }}
         >
           {salaryOptions.map((option) => {
@@ -497,8 +510,12 @@ const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: str
               <button
                 key={option}
                 type="button"
-                onClick={() => {
-                  if (!dragRef.current.moved) onChange(option);
+                onClick={(event) => {
+                  if (!dragRef.current.moved) {
+                    const index = salaryOptions.indexOf(option);
+                    onChange(option);
+                    event.currentTarget.parentElement?.scrollTo({ top: index * 48, behavior: 'smooth' });
+                  }
                 }}
                 className={`block h-12 w-full snap-center text-center transition-all duration-200 ${
                   selected ? 'text-3xl font-black text-black dark:text-white' : 'text-lg font-bold text-gray-300'
