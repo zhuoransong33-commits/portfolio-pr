@@ -51,8 +51,8 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     optionEn: 'Graphic / UI Visual',
     title: '平面设计 / UI 视觉方向',
     defaultRole: '平面设计实习生 / 视觉设计实习生',
-    summary: '具备数字媒体艺术与环境设计复合背景，能够完成品牌视觉、版式排版、信息图表、界面视觉与作品集整理，理解视觉信息层级和基础网页呈现。',
-    strengths: ['品牌视觉与版式排版', '信息图表设计与内容整理', 'UI 页面视觉与组件化思维', '摄影素材处理与视觉统一'],
+    summary: '具备数字媒体艺术设计与环境设计复合背景，长期参与摄影、视觉设计、作品集排版和影像后期项目。能够从信息整理、图像拍摄、后期修图到平面物料输出形成完整流程，适合承担品牌视觉、宣传物料、社媒图文、作品集和基础 UI 视觉相关工作。',
+    strengths: ['宣传物料与品牌视觉延展', '信息图表、作品集与图文版式整理', '摄影素材拍摄、筛选、调色与精修', '能够结合 Photoshop / Lightroom 输出统一视觉风格'],
     software: ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe Lightroom', 'Figma', 'Premiere Pro'],
     projects: [
       {
@@ -64,6 +64,11 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
         title: '摄影集 PDF 作品集',
         meta: '版式设计 / 图文编排 / 作品集整理',
         description: '完成摄影作品的筛选、叙事顺序组织和 PDF 作品集排版，用统一视觉语言呈现个人影像风格。',
+      },
+      {
+        title: '广志路社区美好小店宣传拍摄',
+        meta: '负责人 / 平面拍摄 / 视觉宣传',
+        description: '为 16 家社区小店制定差异化拍摄方案，使用 Lightroom 调色与 Photoshop 精修强化产品质感，同步输出宣传海报和微信公众号展示图。',
       },
     ],
     jd: {
@@ -77,8 +82,8 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     optionEn: 'Photography / Still Image',
     title: '摄影摄像 / 静态影像方向',
     defaultRole: '摄影助理 / 摄影摄像实习生',
-    summary: '具备人像、产品、空间与纪实影像的拍摄经验，熟悉现场灯光协助、素材整理、后期筛选与基础修图，能够围绕视觉叙事完成影像内容表达。',
-    strengths: ['人像、产品与空间摄影', '灯光布置与现场协助', '照片筛选、调色和修图', '影像叙事与作品集整理'],
+    summary: '具备人像、产品、空间与社区宣传类拍摄经验，熟悉拍摄前方案制定、现场灯光布置、素材整理、选片和后期精修。曾协助电商产品、写真、婚纱摄影拍摄，也独立统筹社区店铺宣传拍摄，能够根据不同商业场景调整构图、光线和后期风格。',
+    strengths: ['人像、产品、空间与店铺宣传拍摄', '柔光箱、LED 补光灯等基础灯光协助', 'Lightroom 调色与 Photoshop 精修', '拍摄流程统筹、素材整理与后期筛选'],
     software: ['Adobe Photoshop', 'Adobe Lightroom', 'Adobe Illustrator', 'Premiere Pro', 'DaVinci Resolve'],
     projects: [
       {
@@ -90,6 +95,11 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
         title: '静态摄影与摄影集项目',
         meta: '摄影作品 / PDF 作品集',
         description: '持续整理个人摄影作品，涵盖人物、空间、旅行和纪实影像，形成可展示的作品集结构。',
+      },
+      {
+        title: '广志路社区美好小店宣传拍摄',
+        meta: '2023.03 - 2023.04 / 负责人',
+        description: '统筹 16 家小店宣传拍摄，围绕餐饮、文创、零售等不同经营特色制定拍摄方案，项目成果用于社区年度宣传手册，个人获评优秀志愿者。',
       },
     ],
     jd: {
@@ -103,8 +113,8 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     optionEn: 'Video Editing / Shooting',
     title: '视频剪辑 / 拍摄方向',
     defaultRole: '视频剪辑实习生 / 影视后期实习生',
-    summary: '具备影视后期剪辑、短剧素材整理、节奏控制和基础调色经验，能够参与短片、宣传片、社媒视频和动态影像内容制作。',
-    strengths: ['短片粗剪、精剪与节奏把控', '多机位素材整理与项目交付', '基础调色、字幕与包装', '动态影像叙事和镜头衔接'],
+    summary: '具备影视后期剪辑和动态影像创作经验，能参与素材整理、粗剪、精剪、调色、镜头衔接和版本交付。曾独立完成 4 部短剧单集后期剪辑流程，并多次协助主管审核成片与处理多机位素材，理解剧情节奏、画面连续性和团队交付要求。',
+    strengths: ['短剧粗剪、精剪与节奏控制', '多机位素材整理、特效包装与版本交付', '基础调色、字幕和画面连续性处理', '短片叙事、动态影像氛围和镜头衔接'],
     software: ['Adobe Premiere Pro', 'Adobe After Effects', 'DaVinci Resolve', 'Adobe Photoshop', 'Adobe Illustrator'],
     projects: [
       {
@@ -129,8 +139,8 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     optionEn: 'Interior / Environmental Design',
     title: '室内设计 / 环艺方向',
     defaultRole: '室内设计实习生 / 环境设计实习生',
-    summary: '环境设计本科在读，具备室内空间规划、材料与灯光理解、模型表达和效果图呈现能力，能够参与概念设计、方案深化和展厅空间表达。',
-    strengths: ['室内空间概念与功能规划', '建模、渲染与效果表达', '材料、灯光和空间氛围分析', '展厅与数字空间项目表达'],
+    summary: '环境设计本科在读，系统学习室内空间规划、材料工艺、照明设计和 3D 建模，具备方案设计、空间布局、动线规划、模型搭建和效果图表达能力。曾参与南京某企业奇石馆设计竞赛，承担展馆展示形式、空间规划和效果图制作相关工作。',
+    strengths: ['室内空间布局、功能分区与动线规划', 'SketchUp 建模、Lumion 渲染与效果图表达', '材料参数、灯光环境和视觉效果优化', '展馆展示形式、静态展示区域与游览动线设计'],
     software: ['AutoCAD', 'SketchUp', '3ds Max', 'Blender', 'Lumion', 'D5 Render'],
     projects: [
       {
@@ -141,7 +151,7 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
       {
         title: '南京爻石博物馆数字展厅',
         meta: '展厅设计 / 数字空间 / 校企合作',
-        description: '围绕石文化艺术收藏品鉴数字展厅进行视觉和空间内容表达，包含导览、展陈和数字展示方向。',
+        description: '围绕石文化艺术收藏品鉴数字展厅进行展示形式、空间布局和效果图表达，协同团队完成动线规划和展示区域分区，方案经多轮迭代后获得竞赛二等奖。',
       },
     ],
     jd: {
@@ -155,8 +165,8 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     optionEn: 'Personal General Ability',
     title: '个人综合能力方向',
     defaultRole: '视觉内容 / 设计综合实习生',
-    summary: '拥有数字媒体艺术、环境设计、摄影、视频剪辑和平面视觉的复合经历，适合需要快速学习、内容整理、跨工具协作和多类型视觉执行的岗位。',
-    strengths: ['跨摄影、视频、平面、空间的综合执行', '作品集整理与视觉信息归纳', '快速学习和项目交付意识', '基础前端页面实现与个人网站维护'],
+    summary: '拥有数字媒体艺术设计、环境设计、摄影、影视后期和平面视觉的复合经历，兼具项目执行、团队协作和内容整理能力。经历覆盖短剧后期、商业摄影协助、社区宣传拍摄、展馆空间竞赛和个人作品集整理，适合需要跨工具、多类型视觉内容执行的岗位。',
+    strengths: ['跨摄影、视频、平面、空间项目的综合执行', '从素材采集、后期处理到成果归档的完整流程意识', '社团、班级和社区项目中的组织协作经验', '专业排名靠前，具备持续学习和快速适应不同项目的能力'],
     software: ['Photoshop', 'Illustrator', 'Premiere Pro', 'After Effects', 'Blender', 'SketchUp', 'AutoCAD', 'Figma'],
     projects: [
       {
@@ -195,42 +205,46 @@ const resumeBase = {
     {
       title: '环境设计 | 本科',
       meta: '2024.08 - 2026.07 | 南通理工学院',
-      description: '系统学习室内空间规划、材料工艺、照明设计与 3D 建模，专业排名前 10%。',
+      description: '主修环境设计，系统学习室内空间规划、材料工艺、照明设计及 3D 建模等课程，专业排名前 10%。掌握 AutoCAD、SketchUp、3ds Max 等设计软件，具备方案设计和施工图深化基础。',
     },
     {
       title: '数字媒体艺术设计 | 大专',
       meta: '2021.09 - 2024.06 | 南京工业职业技术大学',
-      description: '学习数字创意、影视后期、视觉设计与数字艺术工具，专业排名前 5%，多门实训课程成绩优秀。',
+      description: '主修数字媒体艺术设计，学习数字创意、影视后期、视觉设计与数字艺术工具，系统接触 Photoshop、Premiere、Blender、UE 等软件，专业排名前 5%，多门实训课程全优。',
     },
   ],
   work: [
     {
       title: '影视后期剪辑师 | 洛阳江湖影视',
       meta: '2025.06 - 至今',
-      description: '负责短剧素材粗剪、精剪和调色，独立完成 4 部短剧单集后期流程，协助多机位素材整理与特效包装。',
+      description: '负责影视剧素材粗剪、精剪及调色工作，独立完成 4 部短剧单集后期剪辑流程，单集时长 3-5 分钟；能把控节奏与镜头衔接，多次协助主管审核成片并提交，配合团队完成季度项目交付。',
     },
     {
       title: '摄影助理 | 洛阳夕木摄影工作室',
       meta: '2020.07 - 2020.09',
-      description: '协助完成电商产品、写真及婚纱摄影的灯光布置、现场调试、素材整理和后期筛选。',
+      description: '协助摄影师完成电商产品、写真及婚纱摄影的灯光布置与现场调试，操作柔光箱、LED 补光灯等设备；通过光比控制与角度调整优化人像质感，并参与素材整理和后期筛选。',
     },
   ],
   campus: [
-    '摄影社团社长，负责社团活动组织、摄影内容拍摄与成员协作。',
+    '摄影社团社长，多次组织并参加省级、国家级设计与摄影比赛，积累美术基础、影像表达和跨领域设计经验。',
+    '班级负责人，任职期间班级两次获得优秀班级称号，组织班级活动并推动成员参与志愿服务，累计时长约 93 小时。',
     '广志路社区美好小店宣传拍摄志愿项目优秀志愿者。',
-    '数字媒体艺术设计专业实训课程多项全优成绩。',
   ],
   certificates: [
+    '计算机多媒体技术助理工程师',
+    'IITC 环艺设计师',
+    '普通话二甲',
     '熟悉摄影摄像、影视后期、平面视觉、室内空间表达等复合流程。',
-    '掌握 Adobe 系列、Figma、Blender、SketchUp、AutoCAD 等常用创作工具。',
   ],
   awards: [
     '2023 年国家励志奖学金',
     '南京奇石馆校企合作空间设计竞赛 | 项目奖金 10,000 元',
-    '中国好创意摄影三等奖',
-    '国际雪雕大赛三等奖',
-    '巨鲨杯江苏省大学生摄影优秀奖',
     '第二届网络文化节摄影二等奖',
+    '巨鲨杯江苏省大学生摄影优秀奖',
+    '中国好创意摄影三等奖（国奖）',
+    '国际雪雕大赛三等奖（国奖）',
+    '专业实训课程全优成绩',
+    '摄影社团社长',
   ],
 };
 
