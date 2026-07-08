@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { FileText, ImageDown, RotateCcw } from 'lucide-react';
 import { CONTACT_DATA } from '../src/data/contact';
 import { Language } from '../types';
@@ -185,7 +185,6 @@ const abilityOptions = Object.entries(abilityProfiles).map(([id, profile]) => ({
 }));
 
 const salaryOptions = [
-  '面议',
   ...Array.from({ length: 28 }, (_, index) => `${index + 3}K / 月`),
   '30K 以上 / 月',
 ];
@@ -242,7 +241,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
   const contact = CONTACT_DATA[language];
   const selectedAbility = useMemo(() => abilityProfiles[form.ability], [form.ability]);
   const resolvedRole = form.role || selectedAbility.defaultRole;
-  const resolvedSalary = form.salary || label(language, '面议 / 按岗位预算沟通', 'Negotiable');
+  const resolvedSalary = form.salary || salaryOptions[0];
 
   const updateForm = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((current) => ({ ...current, [key]: value }));
@@ -446,38 +445,74 @@ const WizardActions = ({ children }: { children: React.ReactNode }) => (
   <div className="mt-10 flex justify-center gap-3">{children}</div>
 );
 
-const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
-  <div className="mx-auto max-w-xs">
-    <div className="relative mx-auto h-56 overflow-hidden border-y border-black/20 dark:border-white/20">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-white to-white/0 dark:from-black" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-white to-white/0 dark:from-black" />
-      <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-10 h-12 -translate-y-1/2 border-y border-black/15 dark:border-white/15" />
-      <div
-        className="h-full snap-y snap-mandatory overflow-y-auto py-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onScroll={(event) => {
-          const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(event.currentTarget.scrollTop / 48)));
-          onChange(salaryOptions[index]);
-        }}
-      >
-        {salaryOptions.map((option) => {
-          const selected = value === option;
-          return (
-            <button
-              key={option}
-              type="button"
-              onClick={() => onChange(option)}
-              className={`block h-12 w-full snap-center text-center transition-all duration-200 ${
-                selected ? 'text-3xl font-black text-black dark:text-white' : 'text-lg font-bold text-gray-300'
-              }`}
-            >
-              {option}
-            </button>
-          );
-        })}
+const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
+  const dragRef = useRef({ active: false, moved: false, startY: 0, startScrollTop: 0 });
+
+  const snapToNearest = (element: HTMLDivElement) => {
+    const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(element.scrollTop / 48)));
+    onChange(salaryOptions[index]);
+    element.scrollTo({ top: index * 48, behavior: 'smooth' });
+  };
+
+  return (
+    <div className="mx-auto max-w-xs">
+      <div className="relative mx-auto h-56 overflow-hidden border-y border-black/20 dark:border-white/20">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-white to-white/0 dark:from-black" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-white to-white/0 dark:from-black" />
+        <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-10 h-12 -translate-y-1/2 border-y border-black/15 dark:border-white/15" />
+        <div
+          className="h-full cursor-grab select-none snap-y snap-mandatory overflow-y-auto py-20 active:cursor-grabbing [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          onPointerDown={(event) => {
+            dragRef.current = {
+              active: true,
+              moved: false,
+              startY: event.clientY,
+              startScrollTop: event.currentTarget.scrollTop,
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerMove={(event) => {
+            if (!dragRef.current.active) return;
+            const deltaY = event.clientY - dragRef.current.startY;
+            if (Math.abs(deltaY) > 3) dragRef.current.moved = true;
+            event.currentTarget.scrollTop = dragRef.current.startScrollTop - deltaY;
+          }}
+          onPointerUp={(event) => {
+            dragRef.current.active = false;
+            event.currentTarget.releasePointerCapture(event.pointerId);
+            snapToNearest(event.currentTarget);
+          }}
+          onPointerCancel={(event) => {
+            dragRef.current.active = false;
+            snapToNearest(event.currentTarget);
+          }}
+          onScroll={(event) => {
+            const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(event.currentTarget.scrollTop / 48)));
+            onChange(salaryOptions[index]);
+          }}
+        >
+          {salaryOptions.map((option) => {
+            const selected = value === option;
+            return (
+              <button
+                key={option}
+                type="button"
+                onClick={() => {
+                  if (!dragRef.current.moved) onChange(option);
+                }}
+                className={`block h-12 w-full snap-center text-center transition-all duration-200 ${
+                  selected ? 'text-3xl font-black text-black dark:text-white' : 'text-lg font-bold text-gray-300'
+                }`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ResumeCard = ({
   language,
