@@ -7,7 +7,6 @@ import { ResumeGeneratorSection } from './components/ResumeGeneratorSection';
 import { TimelineSection } from './components/TimelineSection';
 import { Mail, RotateCcw, MessageSquare } from 'lucide-react';
 import { CONTACT_DATA } from './src/data/contact';
-import { ARCHIVES_PAGE_DATA } from './src/data/archives';
 import { PORTFOLIO_PAGE_DATA } from './src/data/portfolioPage';
 import { Language, Category } from './types';
 
@@ -394,14 +393,6 @@ function App() {
       case 'articles':
         return (
           <div className="pt-20 w-full max-w-[96vw] mx-auto">
-             <div className="mb-24 flex flex-col items-center text-center">
-               <h1 className="text-[8vw] leading-none font-black mb-8 text-black dark:text-white transition-colors duration-300">
-                 {ARCHIVES_PAGE_DATA[language].title}
-               </h1>
-               <p className="text-2xl text-gray-500 dark:text-gray-400 max-w-2xl font-medium transition-colors duration-300">
-                 {ARCHIVES_PAGE_DATA[language].description}
-               </p>
-             </div>
              <ResumeGeneratorSection language={language} />
           </div>
         );
@@ -520,7 +511,7 @@ function App() {
          </div>
 
          {/* Footer */}
-          <footer className={`${activeTab === 'dashboard' || activeTab === 'portfolio' || activeTab === 'about' ? 'hidden' : 'flex'} w-full max-w-[96vw] mx-auto mt-32 border-t-2 border-black dark:border-white pt-12 flex-col md:flex-row justify-between items-center text-sm font-light text-gray-400 dark:text-gray-500 uppercase tracking-wide gap-4 transition-colors duration-300`}>
+          <footer className={`${activeTab === 'dashboard' || activeTab === 'portfolio' || activeTab === 'about' || activeTab === 'articles' ? 'hidden' : 'flex'} w-full max-w-[96vw] mx-auto mt-32 border-t-2 border-black dark:border-white pt-12 flex-col md:flex-row justify-between items-center text-sm font-light text-gray-400 dark:text-gray-500 uppercase tracking-wide gap-4 transition-colors duration-300`}>
             <p>© 2026 ZHUORAN SONG</p>
             <p>{content.footerDesign}</p>
          </footer>

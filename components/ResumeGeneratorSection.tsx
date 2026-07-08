@@ -184,6 +184,12 @@ const abilityOptions = Object.entries(abilityProfiles).map(([id, profile]) => ({
   en: profile.optionEn,
 }));
 
+const salaryOptions = [
+  '面议',
+  ...Array.from({ length: 28 }, (_, index) => `${index + 3}K / 月`),
+  '30K 以上 / 月',
+];
+
 const resumeBase = {
   intentionCity: '江苏 / 上海 / 长三角可沟通',
   education: [
@@ -317,136 +323,112 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
     window.setTimeout(() => popup.print(), 300);
   };
 
-  return (
-    <div className="mx-auto w-full max-w-[96vw] pb-20">
-      <div className="grid gap-8 xl:grid-cols-[minmax(22rem,0.82fr)_minmax(34rem,1.18fr)]">
-        <section className="border-t-2 border-black pt-6 dark:border-white">
-          <div className="mb-8">
-            <p className="font-mono text-xs uppercase tracking-[0.24em] text-gray-500">
-              Interview Archive Tool
-            </p>
-            <h2 className="mt-3 text-4xl font-black leading-none tracking-[-0.04em] text-black dark:text-white md:text-6xl">
-              {label(language, '简历生成问卷', 'Resume Generator')}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              {label(
-                language,
-                '选择面试方最关注的能力方向，并填写岗位与薪资信息，页面会自动生成完整简历和对应岗位 JD。',
-                'Select the role focus and fill in role and salary information to generate a tailored resume and JD.'
-              )}
-            </p>
+  if (!isGenerated) {
+    return (
+      <div className="mx-auto flex min-h-[66vh] w-full max-w-3xl items-center justify-center px-4 pb-20">
+        <section className="w-full text-center">
+          <div className="mb-10 flex items-center justify-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-gray-500">
+            <span>{step}-3</span>
+            <span className="h-px w-12 bg-gray-300 dark:bg-gray-700" />
+            <span>{label(language, '共 3 题', '3 questions')}</span>
           </div>
 
-          <div className="mb-6 flex items-center justify-between border-y border-black/20 py-3 font-mono text-xs uppercase tracking-[0.18em] text-gray-500 dark:border-white/20">
-            <span>{label(language, `问题 ${step}-3`, `Question ${step}-3`)}</span>
-            <span>{label(language, '共 3 个问题', '3 questions')}</span>
-          </div>
-
-          <div className="min-h-[24rem]">
+          <div key={step} className="animate-[fadeIn_360ms_ease-out]">
             {step === 1 && (
-              <Question title={label(language, '1. 需要哪方面能力？', '1. Which ability is needed?')}>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {abilityOptions.map((option) => (
-                  <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => {
-                      updateForm('ability', option.id);
-                      setStep(2);
-                    }}
-                    className={`border px-4 py-3 text-left text-sm font-bold transition-colors ${
-                      form.ability === option.id
-                        ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
-                        : 'border-gray-200 text-gray-500 hover:border-black hover:text-black dark:border-gray-800 dark:text-gray-400 dark:hover:border-white dark:hover:text-white'
-                    }`}
-                  >
-                    {label(language, option.zh, option.en)}
-                  </button>
-                ))}
-              </div>
+              <Question title={label(language, '需要哪方面能力？', 'Which ability is needed?')}>
+                <div className="mx-auto grid max-w-xl gap-3">
+                  {abilityOptions.map((option) => (
+                    <button
+                      key={option.id}
+                      type="button"
+                      onClick={() => {
+                        updateForm('ability', option.id);
+                        setStep(2);
+                      }}
+                      className={`border px-5 py-4 text-center text-sm font-bold transition-all duration-300 ${
+                        form.ability === option.id
+                          ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+                          : 'border-gray-200 text-gray-500 hover:border-black hover:text-black dark:border-gray-800 dark:text-gray-400 dark:hover:border-white dark:hover:text-white'
+                      }`}
+                    >
+                      {label(language, option.zh, option.en)}
+                    </button>
+                  ))}
+                </div>
               </Question>
             )}
 
             {step === 2 && (
-              <Question title={label(language, '2. 面试的岗位是什么？', '2. What role is this interview for?')}>
+              <Question title={label(language, '面试的岗位是什么？', 'What role is this interview for?')}>
                 <TextInput value={form.role} placeholder={selectedAbility.defaultRole} onChange={(value) => updateForm('role', value)} />
-                <div className="mt-5 flex gap-3">
+                <WizardActions>
                   <button type="button" onClick={() => setStep(1)} className="border border-gray-200 px-5 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
                     {label(language, '上一题', 'Back')}
                   </button>
-                  <button type="button" onClick={() => setStep(3)} className="bg-black px-5 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
+                  <button type="button" onClick={() => setStep(3)} className="bg-black px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
                     {label(language, '下一题', 'Next')}
                   </button>
-                </div>
+                </WizardActions>
               </Question>
             )}
 
             {step === 3 && (
-              <Question title={label(language, '3. 薪资范围或预算是多少？', '3. What salary range or budget?')}>
-                <TextInput value={form.salary} placeholder={label(language, '期望薪资 / 面议 / 预算范围', 'Expected salary / Negotiable / Budget')} onChange={(value) => updateForm('salary', value)} />
-                <div className="mt-5 flex flex-wrap gap-3">
+              <Question title={label(language, '薪资范围是多少？', 'What salary range?')}>
+                <SalaryWheel value={form.salary || salaryOptions[0]} onChange={(value) => updateForm('salary', value)} />
+                <WizardActions>
                   <button type="button" onClick={() => setStep(2)} className="border border-gray-200 px-5 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
                     {label(language, '上一题', 'Back')}
                   </button>
-                  <button type="button" onClick={() => setIsGenerated(true)} className="bg-black px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
-                    {label(language, '确认生成简历', 'Generate Resume')}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!form.salary) updateForm('salary', salaryOptions[0]);
+                      setIsGenerated(true);
+                    }}
+                    className="bg-black px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black"
+                  >
+                    {label(language, '确认生成', 'Generate')}
                   </button>
-                </div>
+                </WizardActions>
               </Question>
             )}
           </div>
         </section>
-
-        <section>
-          {!isGenerated ? (
-            <div className="grid min-h-[34rem] place-items-center border border-dashed border-gray-300 bg-gray-50/70 p-8 text-center dark:border-gray-800 dark:bg-white/5">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-gray-400">
-                  Resume Locked
-                </p>
-                <h3 className="mt-4 text-3xl font-black text-black dark:text-white">
-                  {label(language, '完成 3 个问题后生成完整简历', 'Complete 3 questions to generate the resume')}
-                </h3>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-gray-500">
-                  {label(language, '当前不会展示详细简历内容。确认生成后，这里会显示定制简历和对应岗位 JD。', 'Detailed resume content is hidden until confirmation.')}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="mb-4 flex flex-wrap justify-end gap-3">
-                <button onClick={downloadImage} className="inline-flex items-center justify-center gap-2 bg-black px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
-                  <ImageDown size={18} />
-                  {label(language, '保存为图片', 'Save Image')}
-                </button>
-                <button onClick={printPdf} className="inline-flex items-center justify-center gap-2 border border-black px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
-                  <FileText size={18} />
-                  {label(language, '保存为 PDF', 'Save PDF')}
-                </button>
-                <button onClick={resetWizard} className="inline-flex items-center justify-center gap-2 border border-gray-200 px-4 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
-                  <RotateCcw size={18} />
-                  {label(language, '重置', 'Reset')}
-                </button>
-              </div>
-              <ResumeCard
-                language={language}
-                form={form}
-                contactEmail={contact.email}
-                selectedAbility={selectedAbility}
-                role={resolvedRole}
-                salary={resolvedSalary}
-              />
-            </div>
-          )}
-        </section>
       </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-[96vw] pb-20">
+      <div className="mb-4 flex flex-wrap justify-end gap-3">
+        <button onClick={downloadImage} className="inline-flex items-center justify-center gap-2 bg-black px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black">
+          <ImageDown size={18} />
+          {label(language, '保存为图片', 'Save Image')}
+        </button>
+        <button onClick={printPdf} className="inline-flex items-center justify-center gap-2 border border-black px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black">
+          <FileText size={18} />
+          {label(language, '保存为 PDF', 'Save PDF')}
+        </button>
+        <button onClick={resetWizard} className="inline-flex items-center justify-center gap-2 border border-gray-200 px-4 py-3 text-sm font-bold text-gray-500 transition-colors hover:border-black hover:text-black dark:border-gray-800 dark:hover:border-white dark:hover:text-white">
+          <RotateCcw size={18} />
+          {label(language, '重置', 'Reset')}
+        </button>
+      </div>
+      <ResumeCard
+        language={language}
+        form={form}
+        contactEmail={contact.email}
+        selectedAbility={selectedAbility}
+        role={resolvedRole}
+        salary={resolvedSalary}
+      />
     </div>
   );
 };
 
 const Question = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
-    <h3 className="mb-3 text-base font-black text-black dark:text-white">{title}</h3>
+    <h3 className="mb-8 text-3xl font-black leading-tight tracking-[-0.03em] text-black dark:text-white md:text-5xl">{title}</h3>
     {children}
   </div>
 );
@@ -456,8 +438,45 @@ const TextInput = ({ value, placeholder, onChange }: { value: string; placeholde
     value={value}
     onChange={(event) => onChange(event.target.value)}
     placeholder={placeholder}
-    className="w-full border border-gray-200 bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-black dark:border-gray-800 dark:focus:border-white"
+    className="mx-auto block w-full max-w-xl border-0 border-b-2 border-black/20 bg-transparent px-4 py-4 text-center text-xl font-black outline-none transition-colors placeholder:text-gray-300 focus:border-black dark:border-white/20 dark:focus:border-white"
   />
+);
+
+const WizardActions = ({ children }: { children: React.ReactNode }) => (
+  <div className="mt-10 flex justify-center gap-3">{children}</div>
+);
+
+const SalaryWheel = ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
+  <div className="mx-auto max-w-xs">
+    <div className="relative mx-auto h-56 overflow-hidden border-y border-black/20 dark:border-white/20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-gradient-to-b from-white to-white/0 dark:from-black" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-t from-white to-white/0 dark:from-black" />
+      <div className="pointer-events-none absolute left-0 right-0 top-1/2 z-10 h-12 -translate-y-1/2 border-y border-black/15 dark:border-white/15" />
+      <div
+        className="h-full snap-y snap-mandatory overflow-y-auto py-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onScroll={(event) => {
+          const index = Math.max(0, Math.min(salaryOptions.length - 1, Math.round(event.currentTarget.scrollTop / 48)));
+          onChange(salaryOptions[index]);
+        }}
+      >
+        {salaryOptions.map((option) => {
+          const selected = value === option;
+          return (
+            <button
+              key={option}
+              type="button"
+              onClick={() => onChange(option)}
+              className={`block h-12 w-full snap-center text-center transition-all duration-200 ${
+                selected ? 'text-3xl font-black text-black dark:text-white' : 'text-lg font-bold text-gray-300'
+              }`}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </div>
 );
 
 const ResumeCard = ({
