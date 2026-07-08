@@ -144,9 +144,9 @@ const abilityProfiles: Record<Ability, AbilityProfile> = {
     software: ['AutoCAD', 'SketchUp', '3ds Max', 'Blender', 'Lumion', 'D5 Render'],
     projects: [
       {
-        title: '创意办公空间项目',
-        meta: '室内设计 / 分析图 / 效果图',
-        description: '完成空间概念、平面分析、材料氛围与效果图表达，整理形成完整的环境 / 室内设计作品展示。',
+        title: '洛阳斌尘办公空间设计',
+        meta: '本科毕业设计 / 620 平方米 / 办公空间',
+        description: '围绕 620 平方米办公空间完成空间概念、平面分析、材料氛围与效果图表达；模型被优选出送展，并获得优秀毕业设计奖项。',
       },
       {
         title: '南京爻石博物馆数字展厅',
