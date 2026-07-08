@@ -190,7 +190,7 @@ const salaryOptions = [
 ];
 
 const resumeBase = {
-  intentionCity: '江苏 / 上海 / 长三角可沟通',
+  intentionCity: '江浙沪',
   education: [
     {
       title: '环境设计 | 本科',
