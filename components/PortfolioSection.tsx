@@ -274,7 +274,7 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-tabs-root {
-        height: max(21rem, calc(100svh - clamp(15.75rem, 31vw, 17.6rem)));
+        height: 100%;
         min-height: 21rem;
       }
 
@@ -371,7 +371,7 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 421px) and (max-width: 639px) {
         .archive-tabs-root {
-          height: max(20rem, calc(100svh - 14.9rem));
+          min-height: 20rem;
         }
       }
 
@@ -397,13 +397,12 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 640px) and (max-width: 819px) {
         .archive-tabs-root {
-          height: max(20rem, calc(100svh - 16.95rem));
+          min-height: 20rem;
         }
       }
 
       @media (max-height: 720px) and (max-width: 1023px) {
         .archive-tabs-root {
-          height: max(19rem, calc(100svh - clamp(14.4rem, 30vw, 16.8rem)));
           min-height: 19rem;
         }
 
@@ -419,7 +418,6 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 1024px) {
         .archive-tabs-root {
-          height: calc(100svh - clamp(18.4rem, 24vw, 20rem));
           min-height: 30rem;
         }
 
@@ -1819,7 +1817,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
 
   if (archiveLayout) {
     return (
-      <div className="w-full max-w-[96vw] mx-auto pb-0">
+      <div className="w-full max-w-[96vw] mx-auto pb-0 flex-1 min-h-0">
         <ArchiveCategoryTabs
           language={language}
           filter={filter}

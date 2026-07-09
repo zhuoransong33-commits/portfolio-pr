@@ -378,7 +378,7 @@ function App() {
         );
       case 'portfolio':
         return (
-          <div className="pt-2 md:pt-6 w-full max-w-[96vw] mx-auto">
+          <div className="pt-2 md:pt-6 w-full max-w-[96vw] mx-auto min-h-[calc(100svh-6rem)] flex flex-col">
              <div className="mb-4 md:mb-6">
                <h1 className="text-[12vw] sm:text-[10vw] md:text-[7vw] leading-none font-black mb-5 md:mb-6 text-black dark:text-white transition-colors duration-300">
                  {PORTFOLIO_PAGE_DATA[language].title}
