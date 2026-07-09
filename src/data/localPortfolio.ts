@@ -36,10 +36,10 @@ export const LOCAL_PORTFOLIO_COLLECTIONS: LocalPortfolioCollection[] = [
   {
     id: 'local-xu',
     category: Category.PHOTO,
-    folderName: 'xu',
+    folderName: '“嘘”',
     title: {
-      zh: 'xu',
-      en: 'Xu',
+      zh: '“嘘”',
+      en: '"Xu"',
     },
     description: {
       zh: '静态摄影作品集，保留原始编排序列。',
@@ -74,8 +74,8 @@ export const LOCAL_PORTFOLIO_COLLECTIONS: LocalPortfolioCollection[] = [
       en: 'Core',
     },
     description: {
-      zh: '平面 / 交互相关静态作品集。',
-      en: 'Static work set for graphic and interaction presentation.',
+      zh: '核/后室/梦核······元素收集',
+      en: 'Core / backrooms / dreamcore element collection.',
     },
     tags: ['Graphic', 'Interaction'],
     imageCount: 23,

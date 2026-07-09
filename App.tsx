@@ -379,13 +379,10 @@ function App() {
       case 'portfolio':
         return (
           <div className="pt-2 md:pt-6 w-full max-w-[96vw] mx-auto">
-             <div className="mb-6 md:mb-10">
+             <div className="mb-4 md:mb-6">
                <h1 className="text-[12vw] sm:text-[10vw] md:text-[7vw] leading-none font-black mb-5 md:mb-6 text-black dark:text-white transition-colors duration-300">
                  {PORTFOLIO_PAGE_DATA[language].title}
                </h1>
-               <p className="text-lg md:text-2xl text-gray-500 dark:text-gray-400 max-w-2xl font-medium transition-colors duration-300">
-                 {PORTFOLIO_PAGE_DATA[language].description}
-               </p>
              </div>
              <PortfolioSection language={language} externalFilter={portfolioCategory} archiveLayout />
           </div>

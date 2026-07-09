@@ -41,11 +41,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <div className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled ? 'pt-4 md:pt-6' : 'pt-4 md:pt-6'}`}>
       <nav 
         className={`
-          flex items-center justify-between 
+          flex min-w-0 items-center justify-between 
           transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]
           ${isScrolled 
-            ? 'w-[92vw] md:w-auto gap-2 md:gap-12 bg-white/90 dark:bg-black/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-2xl md:rounded-full px-4 md:px-10 py-3 md:py-4 shadow-pill dark:shadow-pill-dark' 
-            : 'w-[96vw] bg-transparent border-transparent shadow-none px-0 py-2 backdrop-blur-none'}
+            ? 'w-[96vw] md:w-auto gap-[clamp(0.5rem,2.6vw,3rem)] bg-white/90 dark:bg-black/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-2xl md:rounded-full px-[clamp(0.6rem,2.4vw,2.5rem)] py-3 md:py-4 shadow-pill dark:shadow-pill-dark' 
+            : 'w-[96vw] gap-[clamp(0.5rem,2.8vw,3rem)] bg-transparent border-transparent shadow-none px-0 py-2 backdrop-blur-none'}
         `}
       >
         
@@ -64,7 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Links Right */}
-        <div className={`flex items-center transition-all duration-700 overflow-x-auto no-scrollbar mask-gradient ${isScrolled ? 'gap-2 md:gap-8' : 'gap-3 md:gap-12'}`}>
+        <div className={`flex min-w-0 items-center transition-all duration-700 overflow-hidden ${isScrolled ? 'gap-[clamp(0.35rem,1.7vw,2rem)]' : 'gap-[clamp(0.3rem,2.1vw,3rem)]'}`}>
           {items.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -72,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={`
-                  text-base md:text-xl font-bold uppercase tracking-wide transition-colors duration-200 relative group whitespace-nowrap
+                  text-[clamp(0.82rem,2.35vw,1.25rem)] font-bold uppercase tracking-wide transition-colors duration-200 relative group whitespace-nowrap
                   ${isHeroNav
                     ? (isActive ? 'text-white' : 'text-white/45 hover:text-white')
                     : (isActive ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white')}
@@ -86,10 +86,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
           })}
 
           {/* Divider */}
-          <div className={`w-[1px] h-6 md:h-8 shrink-0 mx-2 ${isHeroNav ? 'bg-white/30' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
+          <div className={`w-[1px] h-6 md:h-8 shrink-0 mx-[clamp(0.15rem,0.9vw,0.5rem)] ${isHeroNav ? 'bg-white/30' : 'bg-gray-200 dark:bg-gray-700'}`}></div>
 
           {/* Controls: Language & Theme & Gravity */}
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          <div className="flex items-center gap-[clamp(0.15rem,1.2vw,1rem)] shrink-0">
              {/* Language Toggle */}
              <button
                onClick={toggleLanguage}

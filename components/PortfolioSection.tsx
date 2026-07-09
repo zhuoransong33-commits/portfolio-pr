@@ -152,8 +152,12 @@ const ArchiveCategoryTabs = ({
     className="archive-tabs-root relative left-1/2 w-screen -translate-x-1/2 mb-0 min-h-[calc(100svh-22rem)] overflow-visible"
     onMouseLeave={() => setHoveredArchive(null)}
   >
-    <div className="absolute left-[2vw] right-[2vw] top-0 flex justify-between font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-black/70 dark:text-white/60 pointer-events-none">
-      <span>{language === 'zh' ? '作品' : 'Works'}</span>
+    <div className="absolute left-[2vw] right-[2vw] top-0 flex justify-between gap-6 font-sans text-sm md:text-base tracking-[-0.01em] text-gray-500 dark:text-gray-400 pointer-events-none">
+      <span className="max-w-[42rem] leading-relaxed">
+        {language === 'zh'
+          ? '精选影像创作、视觉设计和环境室内设计作品。'
+          : 'A selection of works spanning Videography, Visual Design, and Environment & Interior Design.'}
+      </span>
       <span className="font-serif text-5xl md:text-7xl normal-case tracking-[-0.05em] text-black/12 dark:text-white/12">
         Archive
       </span>

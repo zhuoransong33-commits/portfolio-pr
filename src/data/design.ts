@@ -15,7 +15,7 @@ const DESIGN_DATA_ALL: Project[] = [
     zh: {
       title: '个人网站设计 | Zhuoran Song Portfolio',
       subtitle: '个人作品网站 / UI 设计 / 前端实现',
-      description: '围绕个人作品归档、分类浏览和简历生成搭建的响应式作品网站。',
+      description: '你看到的，就是我做到的。',
       role: '设计 / 前端实现 / 内容整理',
       tags: ['个人网站', 'UI 设计', '作品归档', 'React'],
       awards: [],
@@ -25,7 +25,7 @@ const DESIGN_DATA_ALL: Project[] = [
     en: {
       title: 'Personal Website Design | Zhuoran Song Portfolio',
       subtitle: 'Portfolio Website / UI Design / Front-end',
-      description: 'A responsive portfolio website built around personal work archiving, category browsing, and resume generation.',
+      description: 'What you see is what I built.',
       role: 'Design / Front-end / Content Curation',
       tags: ['Portfolio Site', 'UI Design', 'Archive', 'React'],
       awards: [],
