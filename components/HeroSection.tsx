@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { HOME_DATA } from '../src/data/home';
 import { CONTACT_DATA } from '../src/data/contact';
-import { assetPath } from '../src/utils/assetPath';
+import { thumbnailPath } from '../src/utils/assetPath';
 import { Language, Category } from '../types';
 
 interface HeroSectionProps {
@@ -26,14 +26,14 @@ interface ArchiveFolder {
 }
 
 const xuPhotoImages = Array.from({ length: 18 }, (_, index) =>
-  assetPath(`/works/local/xu/${String(index + 1).padStart(2, '0')}.webp`)
+  thumbnailPath(`/works/local/xu/${String(index + 1).padStart(2, '0')}.webp`)
 );
 
 const folderImages = {
   photo: xuPhotoImages[0],
-  video: assetPath('/works/featured/featured-02.webp'),
-  graphic: assetPath('/works/featured/featured-03.webp'),
-  interior: assetPath('/works/featured/featured-04.webp'),
+  video: thumbnailPath('/works/featured/featured-02.webp'),
+  graphic: thumbnailPath('/works/featured/featured-03.webp'),
+  interior: thumbnailPath('/works/featured/featured-04.webp'),
 };
 
 const zhFolders: ArchiveFolder[] = [

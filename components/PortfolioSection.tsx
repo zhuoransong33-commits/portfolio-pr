@@ -5,7 +5,7 @@ import { PROJECTS, CATEGORY_LABELS } from '../constants';
 import { Category, Language, ProjectDisplay } from '../types';
 import { PHOTOGRAPHY_GALLERY } from '../src/data/photography';
 import { LOCAL_ENVIRONMENT_COLLECTIONS, LOCAL_PHOTOGRAPHY_COLLECTIONS, LocalPortfolioCollection } from '../src/data/localPortfolio';
-import { assetPath } from '../src/utils/assetPath';
+import { assetPath, thumbnailPath } from '../src/utils/assetPath';
 import { ArrowUpRight, X, Github, ExternalLink, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
 const BBQ_CATEGORY = 'bbq';
@@ -492,7 +492,7 @@ const SingleImagePreview = ({
         aria-label={`Open ${title}`}
       >
         <img
-          src={image}
+          src={thumbnailPath(image)}
           alt={title}
           loading="eager"
           decoding="async"
@@ -645,7 +645,7 @@ const PhotoStackViewer = ({
               }}
             >
               <img
-                src={images[index]}
+                src={thumbnailPath(images[index])}
                 alt={`${title} ${index + 1}`}
                 loading={absOffset <= 1 ? 'eager' : 'lazy'}
                 decoding="async"
@@ -897,7 +897,7 @@ const FilmNegativePreview = ({
                   key={image}
                 >
                   <img
-                    src={image}
+                    src={thumbnailPath(image)}
                     alt={`${title} preview ${stripIndex * 4 + index + 1}`}
                     loading="lazy"
                     decoding="async"
@@ -1385,7 +1385,7 @@ const CategoryArchiveDetail = ({
                               <PhotoAlbumCoverPreview compact />
                             ) : (
                               <img
-                                src={coverImage}
+                                src={thumbnailPath(coverImage)}
                                 alt={projectTitle}
                                 loading="lazy"
                                 decoding="async"
@@ -1556,7 +1556,7 @@ const CategoryArchiveDetail = ({
                       <PhotoAlbumCoverPreview compact />
                     ) : image ? (
                       <img
-                        src={image}
+                        src={thumbnailPath(image)}
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
@@ -1783,7 +1783,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                       controls
                       playsInline
                       preload="metadata"
-                      poster={displayProject.image}
+                      poster={thumbnailPath(displayProject.image)}
                       className="h-full w-full object-contain bg-black"
                     />
                   ) : displayProject.bilibiliId ? (
@@ -1797,7 +1797,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                     />
                   ) : displayProject.image ? (
                     <img
-                      src={displayProject.image}
+                      src={thumbnailPath(displayProject.image)}
                       alt={displayProject.title}
                       referrerPolicy="no-referrer"
                       className="h-full w-full object-cover"
@@ -1943,7 +1943,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                     ) : project.image && !project.image.includes('picsum') ? (
                       <div className="relative h-full w-full">
                         <img 
-                          src={project.image} 
+                          src={thumbnailPath(project.image)} 
                           alt={project.title} 
                           loading="lazy"
                           decoding="async"
@@ -2115,7 +2115,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                                     {gallery.map((item, idx) => (
                                         <React.Fragment key={idx}>
                                             <GalleryImage
-                                                src={item}
+                                                src={thumbnailPath(item)}
                                                 alt={`${displayProject.title} ${idx + 1}`}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
@@ -2165,7 +2165,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                               playsInline
                               preload="metadata"
                               className="w-full h-full object-contain bg-black"
-                              poster={displayProject.image}
+                              poster={thumbnailPath(displayProject.image)}
                            />
                         ) : displayProject.bilibiliId ? (
                            // Bilibili Player with Click-to-Load Optimization
@@ -2196,7 +2196,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                            <>
                               {displayProject.image && !displayProject.image.includes('picsum') ? (
                                   <img 
-                                    src={displayProject.image} 
+                                    src={thumbnailPath(displayProject.image)} 
                                     alt={displayProject.title} 
                                     referrerPolicy="no-referrer"
                                     className="w-full h-full object-cover" 

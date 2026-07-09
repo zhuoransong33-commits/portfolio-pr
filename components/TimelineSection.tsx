@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { EDUCATION_DATA } from '../src/data/education';
 import { CONTACT_DATA } from '../src/data/contact';
-import { assetPath } from '../src/utils/assetPath';
+import { thumbnailPath } from '../src/utils/assetPath';
 import { Language } from '../types';
 
 interface TimelineSectionProps {
@@ -518,7 +518,7 @@ const ProfileContent = ({ profileText, contactRows }: { profileText: string; con
   <div className="grid gap-5 md:grid-cols-[13rem_minmax(0,1fr)]">
     <div className="aspect-[4/5] overflow-hidden border border-dotted border-black/30 bg-[#f5f5f2]">
       <img
-        src={assetPath('/works/local/profile/id-photo.jpg')}
+        src={thumbnailPath('/works/local/profile/id-photo.jpg')}
         alt="Zhuoran Song portrait"
         loading="lazy"
         decoding="async"
