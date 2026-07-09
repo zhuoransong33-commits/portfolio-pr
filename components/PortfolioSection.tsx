@@ -274,7 +274,7 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-tabs-root {
-        height: 100%;
+        height: calc(100svh - clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem));
         min-height: 21rem;
       }
 
@@ -371,6 +371,7 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 421px) and (max-width: 639px) {
         .archive-tabs-root {
+          height: calc(100svh - clamp(13.4rem, calc(10rem + 10vw), 17.25rem));
           min-height: 20rem;
         }
       }
@@ -378,7 +379,7 @@ const ArchiveCategoryTabs = ({
       @media (min-width: 640px) and (max-width: 1023px) {
         .archive-folder-card--responsive {
           --folder-tab-depth: 2.05rem;
-          min-height: clamp(8.9rem, 19svh, 9.8rem);
+          min-height: clamp(8rem, 15.8svh, 9rem);
           width: calc(100% + 10rem);
           padding-left: clamp(1.7rem, 4vw, 2.6rem);
         }
@@ -397,12 +398,14 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 640px) and (max-width: 819px) {
         .archive-tabs-root {
+          height: calc(100svh - clamp(14.2rem, calc(10.5rem + 10vw), 18rem));
           min-height: 20rem;
         }
       }
 
       @media (max-height: 720px) and (max-width: 1023px) {
         .archive-tabs-root {
+          height: calc(100svh - clamp(12.8rem, calc(9.5rem + 10vw), 16.75rem));
           min-height: 19rem;
         }
 
@@ -418,6 +421,7 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 1024px) {
         .archive-tabs-root {
+          height: calc(100svh - clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem));
           min-height: 30rem;
         }
 
