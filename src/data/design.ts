@@ -1,6 +1,38 @@
 import { Project } from '../../types';
+import { assetPath } from '../utils/assetPath';
 
 const DESIGN_DATA_ALL: Project[] = [
+  {
+    id: 'portfolio-site',
+    common: {
+      category: 'Graphics & UI',
+      image: assetPath('/works/featured/featured-03.webp'),
+      websiteUrl: 'https://zhuoransong33-commits.github.io/portfolio-pr/',
+      githubUrl: 'https://github.com/zhuoransong33-commits/portfolio-pr',
+      year: '2026',
+      date: '2026',
+    },
+    zh: {
+      title: '个人网站设计 | Zhuoran Song Portfolio',
+      subtitle: '个人作品网站 / UI 设计 / 前端实现',
+      description: '围绕个人作品归档、分类浏览和简历生成搭建的响应式作品网站。',
+      role: '设计 / 前端实现 / 内容整理',
+      tags: ['个人网站', 'UI 设计', '作品归档', 'React'],
+      awards: [],
+      concept: '网站以“作品档案柜”为核心隐喻，将摄影、动态影像、平面交互、环境室内设计等内容组织成可翻阅的标签页与档案卡片。视觉上选择高对比黑白、工业感虚线边框、文件夹切角、悬浮胶囊导航和大字号层级，形成介于作品集、档案系统和实验界面之间的风格。',
+      roleDetail: '负责网站信息架构、页面布局、交互状态、暗色/亮色模式、作品资源整理、GitHub Pages 部署流程和移动端适配。通过 React + Vite 搭建单页应用，用组件化方式拆分首页、作品页、档案页、关于页和联系页，并针对作品图片、PDF、视频外链与简历生成器设计不同展示方式。',
+    },
+    en: {
+      title: 'Personal Website Design | Zhuoran Song Portfolio',
+      subtitle: 'Portfolio Website / UI Design / Front-end',
+      description: 'A responsive portfolio website built around personal work archiving, category browsing, and resume generation.',
+      role: 'Design / Front-end / Content Curation',
+      tags: ['Portfolio Site', 'UI Design', 'Archive', 'React'],
+      awards: [],
+      concept: 'The site uses an archive cabinet as its core metaphor, organizing photography, motion image, graphic interaction, and environment design into browsable folders and layered cards. The visual direction combines high-contrast black and white, dotted borders, folder tabs, floating pill navigation, and strong typographic hierarchy.',
+      roleDetail: 'Responsible for information architecture, layout, interaction states, dark/light themes, work asset organization, GitHub Pages deployment, and responsive adaptation. The site is built as a React + Vite single-page application with dedicated views for home, works, archive, about, contact, PDF previews, video links, and resume generation.',
+    },
+  },
   {
     id: 'd1',
     common: {
@@ -126,24 +158,24 @@ const DESIGN_DATA_ALL: Project[] = [
       figmaUrl: 'https://www.figma.com/design/hslZfU850zu8tJ6P1Y6fbC/%E6%AF%95%E8%AE%BE-%7C-%E8%AE%A1%E9%87%8F%E7%94%B5%E5%BD%B1%E5%AD%A6%E5%8F%AF%E8%A7%86%E5%8C%96?node-id=0-1&t=BT0hFhRYsmFehU60-1'
     },
     zh: {
-      title: '本科毕设 | 基于计量电影学的影片信息图表设计',
-      subtitle: '视觉设计系统',
-      description: '基于计量电影学（Cinemetrics）的信息图表设计项目，主要是对电影进行内容上的数据分析可视化。',
-      role: '全包',
-      tags: ['信息图表', '视计量电影学', 'Figma'],
+      title: '影视拉片工具 | CineViz 影片分析',
+      subtitle: '影视分析 / 数据可视化 / Figma',
+      description: '用于分析影片色彩倾向、画面构成和剧情激烈程度的影视拉片可视化工具。',
+      role: '设计 / 数据整理 / 可视化表达',
+      tags: ['影视拉片', '色彩分析', '画面构成', '剧情节奏'],
       awards: ["无"],
-      concept: "模拟荧幕的暗调设计风格以及霓虹高饱和提示色设计。",
-      roleDetail: "啥都干啊，这可是我的毕设。"
+      concept: "项目以计量电影学为方法基础，将影片中的色彩分布、镜头画面结构、人物关系和剧情强度转译为可阅读的信息图表。界面采用接近放映厅和剪辑台的暗色底色，搭配高饱和提示色、时间轴和圆形色盘，让观众能够快速比较不同影片在视觉风格和叙事节奏上的差异。",
+      roleDetail: "负责影片样本整理、画面信息提取、色彩倾向归纳、剧情强度判断、信息层级梳理和图表版式设计，并在 Figma 中完成整套可视化页面的排版与视觉系统。"
     },
     en: {
-      title: 'Infographic Design for Movie Information | Undergraduate Thesis',
-      subtitle: 'Visual Design System',
-      description: 'The infographic design project based on Cinemetrics, which mainly focuses on the content analysis and visualization of movies.',
-      role: 'ALL',
-      tags: ['Infographic', 'Cinemetrics', 'Figma'],
+      title: 'CineViz | Film Analysis Tool',
+      subtitle: 'Film Analysis / Data Visualization / Figma',
+      description: 'A visual analysis tool for reading film color tendency, frame composition, and narrative intensity.',
+      role: 'Design / Data Organization / Visualization',
+      tags: ['Film Analysis', 'Color Study', 'Composition', 'Narrative Rhythm'],
       awards: ["None"],
-      concept: "Antique kraft paper design, new Chinese-style design.",
-      roleDetail: "Cover everything."
+      concept: "Based on cinemetrics, the project translates film color distribution, frame structure, character relationship, and narrative intensity into readable information graphics. The interface uses a dark screening-room tone with saturated accent colors, timelines, and circular color charts to compare visual style and narrative rhythm across films.",
+      roleDetail: "Responsible for film sample organization, visual information extraction, color tendency analysis, narrative intensity judgment, information hierarchy, and Figma-based layout design."
     }
   }
 ];
