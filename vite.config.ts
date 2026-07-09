@@ -8,7 +8,7 @@ export default defineConfig({
     host: '127.0.0.1',
   },
   plugins: [react()],
-  base: '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/portfolio-pr/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
