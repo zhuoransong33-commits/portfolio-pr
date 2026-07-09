@@ -28,8 +28,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 120);
+      setIsScrolled(window.scrollY > 32);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

@@ -1255,7 +1255,7 @@ const CategoryArchiveDetail = ({
           >
             <header className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6">
               <p className="font-mono text-sm mb-6">{folder.index}</p>
-              <h2 className="font-serif text-[clamp(3rem,12vw,5.25rem)] md:text-[8vw] lg:text-[6vw] leading-[0.88] md:leading-[0.82] tracking-[-0.04em] md:tracking-[-0.06em] break-words">
+              <h2 className="font-serif text-[clamp(2.6rem,9vw,4.35rem)] md:text-[5.6vw] lg:text-[4.25vw] leading-[0.92] md:leading-[0.88] tracking-[-0.035em] md:tracking-[-0.045em] break-words">
                 {title}
               </h2>
             </header>
@@ -1431,7 +1431,7 @@ const CategoryArchiveDetail = ({
           >
             <header className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6">
               <p className="font-mono text-sm mb-6">{folder.index}</p>
-              <h2 className="font-serif text-[clamp(3rem,12vw,5.25rem)] md:text-[8vw] lg:text-[6vw] leading-[0.88] md:leading-[0.82] tracking-[-0.04em] md:tracking-[-0.06em] break-words">
+              <h2 className="font-serif text-[clamp(2.6rem,9vw,4.35rem)] md:text-[5.6vw] lg:text-[4.25vw] leading-[0.92] md:leading-[0.88] tracking-[-0.035em] md:tracking-[-0.045em] break-words">
                 {title}
               </h2>
             </header>
@@ -1503,7 +1503,7 @@ const CategoryArchiveDetail = ({
         >
           <header className="px-5 md:px-8 pt-6 md:pt-8 pb-5 md:pb-6">
             <p className="font-mono text-sm mb-6">{folder.index}</p>
-            <h2 className="font-serif text-[clamp(3rem,12vw,5.25rem)] md:text-[8vw] lg:text-[6vw] leading-[0.88] md:leading-[0.82] tracking-[-0.04em] md:tracking-[-0.06em] break-words">
+            <h2 className="font-serif text-[clamp(2.6rem,9vw,4.35rem)] md:text-[5.6vw] lg:text-[4.25vw] leading-[0.92] md:leading-[0.88] tracking-[-0.035em] md:tracking-[-0.045em] break-words">
               {title}
             </h2>
           </header>
