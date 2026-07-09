@@ -255,7 +255,7 @@ const FloatingCards = ({
       heading: labels.skillsets,
       tone: 'yellow',
       cardWidth: '50vw',
-      cardMinHeight: 'min(72svh, 43rem)',
+      cardMinHeight: 'min(64svh, 38rem)',
       stack: { left: '0rem', top: 'clamp(1rem, 7vw, 4.5rem)' },
       sliverTop: 'clamp(1rem, 7vw, 4.5rem)',
       z: 34,
@@ -274,7 +274,7 @@ const FloatingCards = ({
       heading: profileHeading,
       tone: 'white',
       cardWidth: 'min(70rem, 72vw)',
-      cardMinHeight: 'min(58svh, 36rem)',
+      cardMinHeight: 'min(50svh, 31rem)',
       stack: { left: '0rem', top: 'clamp(10rem, 18vw, 16rem)' },
       sliverTop: 'clamp(10rem, 18vw, 16rem)',
       z: 38,
@@ -331,10 +331,10 @@ const FloatingCards = ({
             <PageGutter tone={card.tone === 'yellow' ? 'yellow' : 'white'} />
             <SelectionCardHeader index={card.index} title={card.title} />
             <CornerMarks />
-            <h2 className="ml-8 overflow-visible whitespace-nowrap px-5 pb-4 pt-5 font-serif text-[clamp(2.9rem,5.2vw,5.8rem)] leading-none tracking-[-0.065em] text-[#242424] md:px-7">
+            <h2 className="ml-8 overflow-visible whitespace-nowrap px-5 pb-3 pt-4 font-serif text-[clamp(2.25rem,3.8vw,4.15rem)] leading-[0.95] tracking-[-0.045em] text-[#242424] md:px-7">
               {card.heading}
             </h2>
-            <div className="ml-8 p-5 md:p-7">
+            <div className="ml-8 p-4 md:p-6">
               {card.children}
             </div>
           </div>
@@ -506,7 +506,7 @@ const CornerMarks = () => (
 const SkillsetList = ({ items }: { items: string[] }) => (
   <div className="border-y border-dotted border-black/35">
     {items.map((item) => (
-      <p key={item} className="border-b last:border-b-0 border-dotted border-black/25 py-2.5 font-serif text-[clamp(1.45rem,2.35vw,3rem)] leading-[1.18] tracking-[-0.045em]">
+      <p key={item} className="border-b last:border-b-0 border-dotted border-black/25 py-2 font-serif text-[clamp(1.2rem,1.75vw,2.05rem)] leading-[1.22] tracking-[-0.025em]">
         {item}
       </p>
     ))}
