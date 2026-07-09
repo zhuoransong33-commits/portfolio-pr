@@ -117,7 +117,7 @@ const ARCHIVE_CATEGORIES = [
 
 const ARCHIVE_FOLDERS = [
   { id: Category.PHOTO, index: '01', zh: '静态摄影', en: 'Photography', color: '#ffe629' },
-  { id: PHOTO_COLLECTION_CATEGORY, index: '02', zh: '摄影集', en: 'Photo Collection', color: '#f2f2f0' },
+  { id: PHOTO_COLLECTION_CATEGORY, index: '02', zh: '作品影像集', en: 'Image Collection', color: '#f2f2f0' },
   { id: Category.VIDEO, index: '03', zh: '动态影像', en: 'Videography', color: '#d8d8d6' },
   { id: Category.DESIGN, index: '04', zh: '平面交互', en: 'Graphic & UI', color: '#eeeeec' },
   { id: Category.ENVIRONMENT, index: '05', zh: '环境 / 室内设计', en: 'Environment / Interior', color: '#b7b7b5' },
