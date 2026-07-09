@@ -766,7 +766,7 @@ const PhotoStackViewer = ({
           border: 1px solid rgba(23, 23, 23, 0.24);
           border-radius: 999px;
           background: rgba(255, 255, 255, 0.38);
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+          font-family: "San Francisco", "SF Pro Text", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
           font-size: 0.78rem;
           letter-spacing: 0.1em;
         }
@@ -2246,7 +2246,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                             {/* Awards - Aligned Star */}
                             {displayProject.awards && displayProject.awards.length > 0 && (
                                 <div className="space-y-4">
-                                  <h4 className="text-base font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
+                                  <h4 className="text-xl font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
                                     {language === 'zh' ? '获奖情况' : 'Awards & Recognition'}
                                   </h4>
                                   <ul className="space-y-3">
@@ -2267,7 +2267,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                             <div className="flex flex-col md:flex-row gap-8 items-start">
                                 {/* Role */}
                                 <div className="space-y-4 flex-1 min-w-[200px]">
-                                    <h4 className="text-base font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
+                                    <h4 className="text-xl font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
                                         {language === 'zh' ? '分工与职责' : 'Role & Responsibility'}
                                     </h4>
                                     <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
@@ -2278,7 +2278,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
 
                                 {/* Tags */}
                                 <div className="space-y-4 flex-1 min-w-[200px]">
-                                    <h4 className="text-base font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">Tags</h4>
+                                    <h4 className="text-xl font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">Tags</h4>
                                     <div className="flex flex-wrap gap-2">
                                         {displayProject.tags.map(tag => (
                                             <span key={tag} className="text-xs font-bold font-mono text-gray-500 border border-gray-300 dark:border-gray-700 px-3 py-1.5 rounded-lg">
@@ -2291,7 +2291,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
                                 {/* Links */}
                                 {(displayProject.githubUrl || displayProject.websiteUrl) && (
                                     <div className="space-y-4 flex-1 min-w-[200px]">
-                                        <h4 className="text-base font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
+                                        <h4 className="text-xl font-bold uppercase text-gray-400 dark:text-gray-500 tracking-wider">
                                             {language === 'zh' ? '相关链接' : 'Links'}
                                         </h4>
                                         <div className="flex flex-wrap gap-4">

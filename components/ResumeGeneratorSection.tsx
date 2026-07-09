@@ -323,7 +323,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
           <title>${fileBaseName}</title>
           <style>
             * { box-sizing: border-box; }
-            body { margin: 0; padding: 24px; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f3f3f0; }
+            body { margin: 0; padding: 24px; font-family: "San Francisco", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-variant-numeric: tabular-nums; background: #f3f3f0; }
             @page { size: A4; margin: 10mm; }
             @media print { body { padding: 0; background: #fff; } article { box-shadow: none !important; } }
           </style>
@@ -635,7 +635,7 @@ const ResumeMetric = ({ label: metricLabel, value }: { label: string; value: str
 );
 
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h4 className="mb-3 font-mono text-xs font-black uppercase tracking-[0.18em] text-black/55">{children}</h4>
+  <h4 className="mb-3 font-mono text-sm font-black uppercase tracking-[0.18em] text-black/55">{children}</h4>
 );
 
 const ListBlock = ({ title, items, compact = false }: { title: string; items: string[]; compact?: boolean }) => (

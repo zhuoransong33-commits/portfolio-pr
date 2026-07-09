@@ -10,7 +10,35 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"OPPO Sans"', 'Inter', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+        sans: [
+          '"San Francisco"',
+          '"SF Pro Display"',
+          '"SF Pro Text"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"PingFang SC"',
+          '"Microsoft YaHei"',
+          'sans-serif',
+        ],
+        serif: [
+          '"San Francisco"',
+          '"SF Pro Display"',
+          '"SF Pro Text"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"PingFang SC"',
+          '"Microsoft YaHei"',
+          'sans-serif',
+        ],
+        mono: [
+          '"San Francisco"',
+          '"SF Pro Text"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"PingFang SC"',
+          '"Microsoft YaHei"',
+          'sans-serif',
+        ],
       },
       colors: {
         primary: '#000000',

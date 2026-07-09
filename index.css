@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --font-site: "San Francisco", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  html,
+  body,
+  button,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-site);
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-site);
+  }
+}
+
 /* Hardware acceleration helpers */
 .transform-gpu {
   transform: translate3d(0, 0, 0);

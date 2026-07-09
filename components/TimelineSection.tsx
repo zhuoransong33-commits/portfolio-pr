@@ -543,7 +543,7 @@ const SkillGroupGrid = ({ title, groups }: { title: string; groups: Array<{ titl
     </p>
     {groups.map((group) => (
       <section key={group.title} className="grid border-b border-dotted border-black/25 last:border-b-0 md:grid-cols-[11rem_minmax(0,1fr)]">
-        <h3 className="border-b border-dotted border-black/25 px-3 py-3 font-sans text-[0.78rem] font-medium uppercase leading-relaxed tracking-[0.08em] text-black/72 md:border-b-0 md:border-r">
+        <h3 className="border-b border-dotted border-black/25 px-3 py-3 font-sans text-sm font-medium uppercase leading-relaxed tracking-[0.08em] text-black/72 md:border-b-0 md:border-r">
           {group.title}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3">
