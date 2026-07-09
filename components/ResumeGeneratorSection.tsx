@@ -348,7 +348,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
 
           <div key={step} className="animate-[fadeIn_360ms_ease-out]">
             {step === 1 && (
-              <Question title={label(language, '需要哪方面能力？', 'Which ability is needed?')}>
+              <Question title={label(language, '我的哪方面能力符合您的要求？', 'Which ability of mine matches your needs?')}>
                 <div className="mx-auto grid max-w-xl gap-3">
                   {abilityOptions.map((option) => (
                     <button

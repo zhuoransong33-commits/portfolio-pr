@@ -6,7 +6,7 @@ const DESIGN_DATA_ALL: Project[] = [
     id: 'portfolio-site',
     common: {
       category: 'Graphics & UI',
-      image: assetPath('/works/featured/featured-03.webp'),
+      image: assetPath('/works/local/profile/portfolio-site-preview.png'),
       websiteUrl: 'https://zhuoransong33-commits.github.io/portfolio-pr/',
       githubUrl: 'https://github.com/zhuoransong33-commits/portfolio-pr',
       year: '2026',

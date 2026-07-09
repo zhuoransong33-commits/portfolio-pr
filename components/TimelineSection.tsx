@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { EDUCATION_DATA } from '../src/data/education';
 import { CONTACT_DATA } from '../src/data/contact';
+import { assetPath } from '../src/utils/assetPath';
 import { Language } from '../types';
 
 interface TimelineSectionProps {
@@ -515,10 +516,14 @@ const SkillsetList = ({ items }: { items: string[] }) => (
 
 const ProfileContent = ({ profileText, contactRows }: { profileText: string; contactRows: [string, string][] }) => (
   <div className="grid gap-5 md:grid-cols-[13rem_minmax(0,1fr)]">
-    <div className="aspect-[4/5] bg-[linear-gradient(135deg,#d6d6d2,#f5f5f2_48%,#bfc3c6)] p-4">
-      <div className="flex h-full items-end border border-dotted border-black/30 p-3 font-mono text-xs uppercase tracking-[0.18em] text-black/55">
-        ZHUORAN SONG
-      </div>
+    <div className="aspect-[4/5] overflow-hidden border border-dotted border-black/30 bg-[#f5f5f2]">
+      <img
+        src={assetPath('/works/local/profile/id-photo.jpg')}
+        alt="Zhuoran Song portrait"
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover object-[50%_18%]"
+      />
     </div>
     <div>
       <p className="font-sans text-[clamp(0.96rem,1.28vw,1.48rem)] font-normal leading-[1.55] tracking-[-0.01em] text-black/78">
