@@ -1,11 +1,12 @@
 import { Category, Project } from '../../types';
+import { assetPath } from '../utils/assetPath';
 
 export const VIDEOGRAPHY_DATA: Project[] = [
   {
     id: 'pojian-graduation-film',
     common: {
       category: Category.VIDEO,
-      image: '/works/local/video/pojian-cover.jpg',
+      image: assetPath('/works/local/video/pojian-cover.jpg'),
       bilibiliId: 'BV1KLMt6LEWY',
       year: '2024',
       date: '2024',

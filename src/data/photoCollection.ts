@@ -1,12 +1,13 @@
 import { Project } from '../../types';
+import { assetPath } from '../utils/assetPath';
 
 export const PHOTO_COLLECTION_DATA: Project[] = [
   {
     id: 'photo-collection-01',
     common: {
       category: 'photo-collection',
-      image: '/works/local/photo-collection/cover.webp',
-      pdfUrl: '/works/local/photo-collection/摄影集.pdf',
+      image: assetPath('/works/local/photo-collection/cover.webp'),
+      pdfUrl: assetPath('/works/local/photo-collection/摄影集.pdf'),
       year: '2026',
       date: '2026',
     },

@@ -1,4 +1,5 @@
 import { Category } from '../../types';
+import { assetPath } from '../utils/assetPath';
 
 export interface LocalPortfolioCollection {
   id: string;
@@ -23,13 +24,13 @@ export interface LocalPortfolioCollection {
 }
 
 const imageList = (basePath: string, count: number) =>
-  Array.from({ length: count }, (_, index) => `${basePath}/${String(index + 1).padStart(2, '0')}.webp`);
+  Array.from({ length: count }, (_, index) => assetPath(`${basePath}/${String(index + 1).padStart(2, '0')}.webp`));
 
 const numberedImageList = (basePath: string, numbers: number[]) =>
-  numbers.map((number) => `${basePath}/${String(number).padStart(2, '0')}.webp`);
+  numbers.map((number) => assetPath(`${basePath}/${String(number).padStart(2, '0')}.webp`));
 
 const numberedPngList = (basePath: string, count: number) =>
-  Array.from({ length: count }, (_, index) => `${basePath}/${String(index + 1).padStart(2, '0')}.png`);
+  Array.from({ length: count }, (_, index) => assetPath(`${basePath}/${String(index + 1).padStart(2, '0')}.png`));
 
 export const LOCAL_PORTFOLIO_COLLECTIONS: LocalPortfolioCollection[] = [
   {
@@ -123,7 +124,7 @@ export const LOCAL_ENVIRONMENT_COLLECTIONS: Array<LocalPortfolioCollection & { i
     imageCount: 1,
     basePath: '/works/local/interior/demo',
     images: imageList('/works/local/interior/demo', 1),
-    pdfUrl: '/works/local/interior/demo/01-demo.pdf',
+    pdfUrl: assetPath('/works/local/interior/demo/01-demo.pdf'),
   },
   {
     id: 'interior-analysis',
@@ -174,7 +175,7 @@ export const LOCAL_ENVIRONMENT_COLLECTIONS: Array<LocalPortfolioCollection & { i
     tags: ['Digital Exhibition', 'Museum', 'Interior'],
     imageCount: 12,
     basePath: '/works/local/interior/digital-exhibition',
-    coverImage: '/works/local/interior/digital-exhibition/cover-yaoshi.png',
+    coverImage: assetPath('/works/local/interior/digital-exhibition/cover-yaoshi.png'),
     images: numberedPngList('/works/local/interior/digital-exhibition', 12),
   },
 ];

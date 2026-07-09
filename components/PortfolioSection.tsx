@@ -5,6 +5,7 @@ import { PROJECTS, CATEGORY_LABELS } from '../constants';
 import { Category, Language, ProjectDisplay } from '../types';
 import { PHOTOGRAPHY_GALLERY } from '../src/data/photography';
 import { LOCAL_ENVIRONMENT_COLLECTIONS, LOCAL_PHOTOGRAPHY_COLLECTIONS, LocalPortfolioCollection } from '../src/data/localPortfolio';
+import { assetPath } from '../src/utils/assetPath';
 import { ArrowUpRight, X, Github, ExternalLink, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
 const BBQ_CATEGORY = 'bbq';
@@ -877,7 +878,7 @@ const FilmNegativePreview = ({
           style={{ animationDelay: `${stripIndex * 120}ms` }}
         >
           <div className="film-negative-leader">
-            <img src="/works/local/film/film-leader-solid.png" alt="" draggable={false} />
+            <img src={assetPath('/works/local/film/film-leader-solid.png')} alt="" draggable={false} />
           </div>
           <div className="film-negative-frames">
             {shouldLoadFrames
