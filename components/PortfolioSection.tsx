@@ -153,7 +153,7 @@ const ArchiveCategoryTabs = ({
     onMouseLeave={() => setHoveredArchive(null)}
   >
     <div className="absolute left-[2vw] right-[2vw] top-0 flex justify-between gap-6 font-sans text-sm md:text-base tracking-[-0.01em] text-gray-500 dark:text-gray-400 pointer-events-none">
-      <span className="max-w-[42rem] leading-relaxed">
+      <span className="hidden max-w-[42rem] leading-relaxed">
         {language === 'zh'
           ? '精选影像创作、视觉设计和环境室内设计作品。'
           : 'A selection of works spanning Videography, Visual Design, and Environment & Interior Design.'}
@@ -163,18 +163,18 @@ const ArchiveCategoryTabs = ({
       </span>
     </div>
 
-    <div className="archive-folder-stage absolute inset-x-0 bottom-0 hidden lg:block">
+    <div className="archive-folder-stage absolute inset-x-0 bottom-0 hidden md:block">
       {ARCHIVE_FOLDERS.map((cat, index) => {
         const label = language === 'zh' ? cat.zh : cat.en;
         const isHovered = hoveredArchive === cat.id;
         const isDimmed = hoveredArchive !== null && hoveredArchive !== cat.id;
         const layout = {
-          [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', bottom: 'auto', height: '40%', zIndex: 41, delay: '260ms' },
-          [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', bottom: 'auto', height: '40%', zIndex: 42, delay: '300ms' },
-          [Category.VIDEO]: { left: '0%', width: '50%', top: '30%', bottom: 'auto', height: '40%', zIndex: 51, delay: '180ms' },
-          [Category.DESIGN]: { left: '50%', width: '50%', top: '30%', bottom: 'auto', height: '40%', zIndex: 52, delay: '220ms' },
-          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '60%', bottom: 'auto', height: '40%', zIndex: 61, delay: '80ms' },
-          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '60%', bottom: 'auto', height: '40%', zIndex: 62, delay: '120ms' },
+          [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', height: '34%', zIndex: 41, delay: '260ms', tabStart: '47%' },
+          [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', height: '34%', zIndex: 42, delay: '300ms', tabStart: '47%' },
+          [Category.VIDEO]: { left: '0%', width: '38%', top: '23%', height: '34%', zIndex: 51, delay: '180ms', tabStart: '61%' },
+          [Category.DESIGN]: { left: '38%', width: '62%', top: '23%', height: '34%', zIndex: 52, delay: '220ms', tabStart: '47%' },
+          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '46%', height: '54%', zIndex: 61, delay: '80ms', tabStart: '47%' },
+          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '46%', height: '54%', zIndex: 62, delay: '120ms', tabStart: '47%' },
         }[cat.id];
 
         return (
@@ -191,24 +191,23 @@ const ArchiveCategoryTabs = ({
             onMouseEnter={() => setHoveredArchive(cat.id)}
             onFocus={() => setHoveredArchive(cat.id)}
             onBlur={() => setHoveredArchive(null)}
-            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.5rem,2.4vw,3rem)] pt-[clamp(1.35rem,2.25vw,2.1rem)] pb-4 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
+            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.5rem,2.4vw,3rem)] pt-[clamp(0.85rem,1.2vw,1.25rem)] pb-4 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
             style={{
               left: layout.left,
               width: layout.width,
               top: layout.top,
-              bottom: layout.bottom,
               height: layout.height,
               zIndex: layout.zIndex,
               backgroundColor: isDimmed ? '#f4f4f2' : cat.color,
               color: isDimmed ? 'rgba(24, 24, 24, 0.16)' : '#181818',
               filter: isDimmed ? 'grayscale(1) saturate(0) brightness(1.05)' : 'none',
               transform: isHovered ? 'translate3d(0, -0.35rem, 0)' : 'translate3d(0, 0, 0)',
-              clipPath: 'polygon(0 0, 47% 0, calc(47% + 2.15rem) 2.15rem, 100% 2.15rem, 100% 100%, 0 100%)',
+              clipPath: `polygon(0 0, ${layout.tabStart} 0, calc(${layout.tabStart} + 2.15rem) 2.15rem, 100% 2.15rem, 100% 100%, 0 100%)`,
               animation: `archiveFolderRise 620ms cubic-bezier(0.16, 1, 0.3, 1) ${layout.delay} both`,
             }}
           >
             <span className="archive-folder-index block font-mono mb-1">{cat.index}</span>
-            <span className="block max-w-[95%] font-serif text-[clamp(1.75rem,2.55vw,3.05rem)] leading-[0.92] tracking-[-0.045em] break-keep">
+            <span className="block max-w-[95%] font-serif text-[clamp(1.55rem,2.25vw,2.7rem)] leading-[0.92] tracking-[-0.045em] break-keep">
               {label}
             </span>
           </button>
@@ -216,7 +215,7 @@ const ArchiveCategoryTabs = ({
       })}
     </div>
 
-    <div className="archive-folder-stage archive-folder-stage--responsive absolute inset-x-0 bottom-0 lg:hidden">
+    <div className="archive-folder-stage archive-folder-stage--responsive absolute inset-x-0 bottom-0 md:hidden">
       {ARCHIVE_FOLDERS.map((cat, index) => {
         const label = language === 'zh' ? cat.zh : cat.en;
         const isHovered = hoveredArchive === cat.id;
@@ -274,7 +273,8 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-tabs-root {
-        height: calc(100svh - clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem));
+        margin-top: clamp(2.75rem, 10vw, 3.25rem);
+        height: calc(100svh - clamp(15.3rem, 45vw, 16rem));
         min-height: 21rem;
       }
 
@@ -371,7 +371,8 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 421px) and (max-width: 639px) {
         .archive-tabs-root {
-          height: calc(100svh - clamp(13.4rem, calc(10rem + 10vw), 17.25rem));
+          margin-top: clamp(2.75rem, 9vw, 3.25rem);
+          height: calc(100svh - clamp(15.3rem, 43vw, 16.1rem));
           min-height: 20rem;
         }
       }
@@ -397,13 +398,23 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 640px) and (max-width: 819px) {
         .archive-tabs-root {
-          height: calc(100svh - clamp(14.2rem, calc(10.5rem + 10vw), 18rem));
+          margin-top: clamp(8rem, 18vw, 10.5rem);
+          height: calc(100svh - clamp(23rem, 42vw, 25.5rem));
+          min-height: 20rem;
+        }
+      }
+
+      @media (min-width: 820px) and (max-width: 1023px) {
+        .archive-tabs-root {
+          margin-top: clamp(10rem, 22vw, 12.5rem);
+          height: calc(100svh - clamp(25rem, 48vw, 27rem));
           min-height: 20rem;
         }
       }
 
       @media (max-height: 720px) and (max-width: 1023px) {
         .archive-tabs-root {
+          margin-top: clamp(2rem, 7vw, 3rem);
           height: calc(100svh - clamp(12.8rem, calc(9.5rem + 10vw), 16.75rem));
           min-height: 19rem;
         }
@@ -417,14 +428,23 @@ const ArchiveCategoryTabs = ({
         }
       }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 768px) {
         .archive-tabs-root {
+          margin-top: 0;
           height: calc(100svh - clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem));
           min-height: 30rem;
         }
 
         .archive-folder-stage--responsive {
           display: none !important;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .archive-tabs-root {
+          margin-top: clamp(9.5rem, 22vw, 13.5rem);
+          height: calc(100svh - clamp(24.5rem, 48vw, 28.5rem));
+          min-height: 20rem;
         }
       }
     `}</style>
