@@ -149,7 +149,7 @@ const ArchiveCategoryTabs = ({
   setHoveredArchive: React.Dispatch<React.SetStateAction<string | null>>;
 }) => (
   <div
-    className="archive-tabs-root relative left-1/2 w-screen -translate-x-1/2 mb-0 min-h-[calc(100svh-22rem)] overflow-visible"
+    className="archive-tabs-root relative left-1/2 w-screen -translate-x-1/2 mb-0 overflow-hidden"
     onMouseLeave={() => setHoveredArchive(null)}
   >
     <div className="absolute left-[2vw] right-[2vw] top-0 flex justify-between gap-6 font-sans text-sm md:text-base tracking-[-0.01em] text-gray-500 dark:text-gray-400 pointer-events-none">
@@ -163,7 +163,7 @@ const ArchiveCategoryTabs = ({
       </span>
     </div>
 
-    <div className="archive-folder-stage absolute inset-x-0 bottom-0 hidden lg:block h-[clamp(28rem,56svh,38rem)]">
+    <div className="archive-folder-stage absolute inset-x-0 bottom-0 hidden lg:block">
       {ARCHIVE_FOLDERS.map((cat, index) => {
         const label = language === 'zh' ? cat.zh : cat.en;
         const isHovered = hoveredArchive === cat.id;
@@ -276,6 +276,10 @@ const ArchiveCategoryTabs = ({
       .archive-tabs-root {
         height: max(21rem, calc(100svh - clamp(15.75rem, 31vw, 17.6rem)));
         min-height: 21rem;
+      }
+
+      .archive-folder-stage {
+        height: 100%;
       }
 
       .archive-folder-card {
@@ -415,7 +419,8 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 1024px) {
         .archive-tabs-root {
-          height: max(22rem, calc(100svh - clamp(18rem, 24vw, 19.2rem)));
+          height: calc(100svh - clamp(18.4rem, 24vw, 20rem));
+          min-height: 30rem;
         }
 
         .archive-folder-stage--responsive {
