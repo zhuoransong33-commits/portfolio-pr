@@ -158,7 +158,7 @@ const ArchiveCategoryTabs = ({
           ? '精选影像创作、视觉设计和环境室内设计作品。'
           : 'A selection of works spanning Videography, Visual Design, and Environment & Interior Design.'}
       </span>
-      <span className="font-serif text-5xl md:text-7xl normal-case tracking-[-0.05em] text-black/12 dark:text-white/12">
+      <span className="hidden font-serif text-5xl md:text-7xl normal-case tracking-[-0.05em] text-black/12 dark:text-white/12">
         Archive
       </span>
     </div>
@@ -169,12 +169,12 @@ const ArchiveCategoryTabs = ({
         const isHovered = hoveredArchive === cat.id;
         const isDimmed = hoveredArchive !== null && hoveredArchive !== cat.id;
         const layout = {
-          [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', bottom: 'auto', height: '46%', zIndex: 41, delay: '260ms' },
-          [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', bottom: 'auto', height: '46%', zIndex: 42, delay: '300ms' },
-          [Category.VIDEO]: { left: '0%', width: '50%', top: '22%', bottom: 'auto', height: '46%', zIndex: 51, delay: '180ms' },
-          [Category.DESIGN]: { left: '50%', width: '50%', top: '22%', bottom: 'auto', height: '46%', zIndex: 52, delay: '220ms' },
-          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '44%', bottom: 'auto', height: '56%', zIndex: 61, delay: '80ms' },
-          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '44%', bottom: 'auto', height: '56%', zIndex: 62, delay: '120ms' },
+          [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', bottom: 'auto', height: '40%', zIndex: 41, delay: '260ms' },
+          [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', bottom: 'auto', height: '40%', zIndex: 42, delay: '300ms' },
+          [Category.VIDEO]: { left: '0%', width: '50%', top: '30%', bottom: 'auto', height: '40%', zIndex: 51, delay: '180ms' },
+          [Category.DESIGN]: { left: '50%', width: '50%', top: '30%', bottom: 'auto', height: '40%', zIndex: 52, delay: '220ms' },
+          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '60%', bottom: 'auto', height: '40%', zIndex: 61, delay: '80ms' },
+          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '60%', bottom: 'auto', height: '40%', zIndex: 62, delay: '120ms' },
         }[cat.id];
 
         return (
@@ -191,7 +191,7 @@ const ArchiveCategoryTabs = ({
             onMouseEnter={() => setHoveredArchive(cat.id)}
             onFocus={() => setHoveredArchive(cat.id)}
             onBlur={() => setHoveredArchive(null)}
-            className="archive-folder-card group absolute block overflow-visible text-left px-[clamp(1.5rem,2.4vw,3rem)] pt-[clamp(0.1rem,0.35vw,0.4rem)] pb-4 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
+            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.5rem,2.4vw,3rem)] pt-[clamp(1.35rem,2.25vw,2.1rem)] pb-4 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
             style={{
               left: layout.left,
               width: layout.width,
@@ -207,8 +207,8 @@ const ArchiveCategoryTabs = ({
               animation: `archiveFolderRise 620ms cubic-bezier(0.16, 1, 0.3, 1) ${layout.delay} both`,
             }}
           >
-            <span className="archive-folder-index relative -top-4 block font-mono mb-1">{cat.index}</span>
-            <span className="relative -top-4 block max-w-[95%] font-serif text-[clamp(2rem,3.25vw,4.45rem)] leading-[0.9] tracking-[-0.045em] break-keep">
+            <span className="archive-folder-index block font-mono mb-1">{cat.index}</span>
+            <span className="block max-w-[95%] font-serif text-[clamp(1.75rem,2.55vw,3.05rem)] leading-[0.92] tracking-[-0.045em] break-keep">
               {label}
             </span>
           </button>
@@ -300,6 +300,7 @@ const ArchiveCategoryTabs = ({
         align-items: stretch;
         overflow: hidden;
         bottom: 0;
+        height: 100%;
       }
 
       .archive-folder-card--responsive {
@@ -307,10 +308,10 @@ const ArchiveCategoryTabs = ({
         --folder-tab-start: 52%;
         width: calc(100% + 8rem);
         max-width: none;
-        min-height: clamp(6.7rem, 14.5svh, 7.7rem);
-        flex: 0 0 auto;
-        padding: clamp(0.9rem, 2.8vw, 1.25rem) clamp(1.25rem, 4vw, 2rem) clamp(0.95rem, 3vw, 1.35rem);
-        margin-top: calc(var(--folder-tab-depth) * -1 - 2px);
+        min-height: 0;
+        flex: 1 1 0;
+        padding: clamp(0.75rem, 2.2vw, 1rem) clamp(1.25rem, 4vw, 2rem) clamp(0.75rem, 2.4vw, 1rem);
+        margin-top: 0;
         clip-path: polygon(0 0, var(--folder-tab-start) 0, calc(var(--folder-tab-start) + var(--folder-tab-depth)) var(--folder-tab-depth), 100% var(--folder-tab-depth), 100% 100%, 0 100%);
       }
 
@@ -352,20 +353,19 @@ const ArchiveCategoryTabs = ({
       .archive-folder-title {
         position: relative;
         z-index: 2;
-        padding-top: clamp(1.35rem, 4.5vw, 1.75rem);
-        font-size: clamp(1.75rem, 6.55vw, 2.55rem);
+        padding-top: clamp(1.05rem, 3.4vw, 1.45rem);
+        font-size: clamp(1.45rem, 5.5vw, 2.15rem);
       }
 
       @media (max-width: 420px) {
         .archive-folder-card--responsive {
           --folder-tab-depth: 1.5rem;
           width: calc(100% + 4rem);
-          min-height: 6.1rem;
         }
 
         .archive-folder-title {
-          padding-top: 1.35rem;
-          font-size: clamp(1.55rem, 6.9vw, 2.05rem);
+          padding-top: 1rem;
+          font-size: clamp(1.35rem, 5.7vw, 1.85rem);
         }
       }
 
@@ -379,7 +379,6 @@ const ArchiveCategoryTabs = ({
       @media (min-width: 640px) and (max-width: 1023px) {
         .archive-folder-card--responsive {
           --folder-tab-depth: 2.05rem;
-          min-height: clamp(7.2rem, 13.8svh, 8.2rem);
           width: calc(100% + 10rem);
           padding-left: clamp(1.7rem, 4vw, 2.6rem);
         }
@@ -391,8 +390,8 @@ const ArchiveCategoryTabs = ({
         }
 
         .archive-folder-title {
-          padding-top: clamp(1.65rem, 3.75vw, 2.15rem);
-          font-size: clamp(2.35rem, 5vw, 2.85rem);
+          padding-top: clamp(1.25rem, 3vw, 1.7rem);
+          font-size: clamp(1.85rem, 4.35vw, 2.45rem);
         }
       }
 
@@ -410,12 +409,11 @@ const ArchiveCategoryTabs = ({
         }
 
         .archive-folder-card--responsive {
-          min-height: clamp(6.9rem, 16svh, 8.2rem);
         }
 
         .archive-folder-title {
-          padding-top: clamp(1.25rem, 4vw, 1.75rem);
-          font-size: clamp(1.68rem, 6.1vw, 2.5rem);
+          padding-top: clamp(0.9rem, 3vw, 1.25rem);
+          font-size: clamp(1.28rem, 4.8vw, 2rem);
         }
       }
 
