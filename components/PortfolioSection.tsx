@@ -317,13 +317,27 @@ const ArchiveCategoryTabs = ({
         flex: 1 1 0;
         padding: clamp(0.38rem, 1.4vw, 0.65rem) clamp(1rem, 3.6vw, 1.6rem) clamp(0.35rem, 1.6vw, 0.7rem);
         margin-top: 0;
-        clip-path: polygon(0 0, var(--folder-tab-start) 0, calc(var(--folder-tab-start) + var(--folder-tab-depth)) var(--folder-tab-depth), 100% var(--folder-tab-depth), 100% 100%, 0 100%);
+        clip-path: none;
+      }
+
+      .archive-folder-card--responsive::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        width: calc(100% - var(--folder-tab-start));
+        height: var(--folder-tab-depth);
+        background: var(--folder-underlay, transparent);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, var(--folder-tab-depth) 100%);
+        pointer-events: none;
       }
 
       .archive-folder-card--responsive .archive-folder-index--responsive {
         position: absolute;
         left: clamp(1.25rem, 4vw, 2rem);
         top: clamp(0.42rem, 1.5vw, 0.7rem);
+        z-index: 2;
         font-size: clamp(0.68rem, 1.9vw, 0.85rem);
       }
 
@@ -333,26 +347,32 @@ const ArchiveCategoryTabs = ({
 
       .archive-folder-card--responsive:nth-child(1) {
         --folder-tab-start: 50%;
+        --folder-underlay: #ffe629;
       }
 
       .archive-folder-card--responsive:nth-child(2) {
         --folder-tab-start: 56%;
+        --folder-underlay: #ffe629;
       }
 
       .archive-folder-card--responsive:nth-child(3) {
         --folder-tab-start: 48%;
+        --folder-underlay: #f2f2f0;
       }
 
       .archive-folder-card--responsive:nth-child(4) {
         --folder-tab-start: 54%;
+        --folder-underlay: #d8d8d6;
       }
 
       .archive-folder-card--responsive:nth-child(5) {
         --folder-tab-start: 46%;
+        --folder-underlay: #eeeeec;
       }
 
       .archive-folder-card--responsive:nth-child(6) {
         --folder-tab-start: 58%;
+        --folder-underlay: #b7b7b5;
       }
 
       .archive-folder-title {
