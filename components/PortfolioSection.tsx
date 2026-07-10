@@ -171,10 +171,10 @@ const ArchiveCategoryTabs = ({
         const layout = {
           [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', height: '34%', zIndex: 41, delay: '260ms', tabStart: '47%' },
           [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', height: '34%', zIndex: 42, delay: '300ms', tabStart: '47%' },
-          [Category.VIDEO]: { left: '0%', width: '38%', top: '23%', height: '34%', zIndex: 51, delay: '180ms', tabStart: '61%' },
-          [Category.DESIGN]: { left: '38%', width: '62%', top: '23%', height: '34%', zIndex: 52, delay: '220ms', tabStart: '47%' },
-          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '46%', height: '54%', zIndex: 61, delay: '80ms', tabStart: '47%' },
-          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '46%', height: '54%', zIndex: 62, delay: '120ms', tabStart: '47%' },
+          [Category.VIDEO]: { left: '0%', width: '50%', top: '33%', height: '34%', zIndex: 51, delay: '180ms', tabStart: '47%' },
+          [Category.DESIGN]: { left: '50%', width: '50%', top: '33%', height: '34%', zIndex: 52, delay: '220ms', tabStart: '47%' },
+          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '66%', height: '34%', zIndex: 61, delay: '80ms', tabStart: '47%' },
+          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '66%', height: '34%', zIndex: 62, delay: '120ms', tabStart: '47%' },
         }[cat.id];
 
         return (
@@ -191,7 +191,7 @@ const ArchiveCategoryTabs = ({
             onMouseEnter={() => setHoveredArchive(cat.id)}
             onFocus={() => setHoveredArchive(cat.id)}
             onBlur={() => setHoveredArchive(null)}
-            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.5rem,2.4vw,3rem)] pt-[clamp(0.85rem,1.2vw,1.25rem)] pb-4 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
+            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.15rem,2.1vw,2.35rem)] pt-[clamp(0.45rem,0.85vw,0.8rem)] pb-2 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
             style={{
               left: layout.left,
               width: layout.width,
@@ -202,12 +202,12 @@ const ArchiveCategoryTabs = ({
               color: isDimmed ? 'rgba(24, 24, 24, 0.16)' : '#181818',
               filter: isDimmed ? 'grayscale(1) saturate(0) brightness(1.05)' : 'none',
               transform: isHovered ? 'translate3d(0, -0.35rem, 0)' : 'translate3d(0, 0, 0)',
-              clipPath: `polygon(0 0, ${layout.tabStart} 0, calc(${layout.tabStart} + 2.15rem) 2.15rem, 100% 2.15rem, 100% 100%, 0 100%)`,
+              clipPath: `polygon(0 0, ${layout.tabStart} 0, calc(${layout.tabStart} + var(--archive-tab-depth)) var(--archive-tab-depth), 100% var(--archive-tab-depth), 100% 100%, 0 100%)`,
               animation: `archiveFolderRise 620ms cubic-bezier(0.16, 1, 0.3, 1) ${layout.delay} both`,
             }}
           >
-            <span className="archive-folder-index block font-mono mb-1">{cat.index}</span>
-            <span className="block max-w-[95%] font-serif text-[clamp(1.55rem,2.25vw,2.7rem)] leading-[0.92] tracking-[-0.045em] break-keep">
+            <span className="archive-folder-index block font-mono mb-0.5">{cat.index}</span>
+            <span className="block max-w-[95%] font-serif text-[clamp(1.25rem,1.85vw,2.25rem)] leading-[0.92] tracking-[-0.045em] break-keep">
               {label}
             </span>
           </button>
@@ -273,9 +273,12 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-tabs-root {
-        margin-top: clamp(2.75rem, 10vw, 3.25rem);
-        height: calc(100svh - clamp(15.3rem, 45vw, 16rem));
-        min-height: 21rem;
+        --archive-natural-top: clamp(12rem, calc(8rem + 10vw), 14.5rem);
+        --archive-height: min(33svh, 18.5rem);
+        --archive-tab-depth: clamp(1rem, 3.6vw, 1.45rem);
+        margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+        height: var(--archive-height);
+        min-height: 15rem;
       }
 
       .archive-folder-stage {
@@ -287,7 +290,7 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-folder-index {
-        font-size: clamp(1rem, 1.05vw, 1.28rem);
+        font-size: clamp(0.78rem, 0.85vw, 1rem);
         line-height: 1;
         letter-spacing: -0.035em;
         position: relative;
@@ -304,13 +307,13 @@ const ArchiveCategoryTabs = ({
       }
 
       .archive-folder-card--responsive {
-        --folder-tab-depth: 1.8rem;
+        --folder-tab-depth: clamp(1rem, 3.6vw, 1.4rem);
         --folder-tab-start: 52%;
         width: calc(100% + 8rem);
         max-width: none;
         min-height: 0;
         flex: 1 1 0;
-        padding: clamp(0.75rem, 2.2vw, 1rem) clamp(1.25rem, 4vw, 2rem) clamp(0.75rem, 2.4vw, 1rem);
+        padding: clamp(0.38rem, 1.4vw, 0.65rem) clamp(1rem, 3.6vw, 1.6rem) clamp(0.35rem, 1.6vw, 0.7rem);
         margin-top: 0;
         clip-path: polygon(0 0, var(--folder-tab-start) 0, calc(var(--folder-tab-start) + var(--folder-tab-depth)) var(--folder-tab-depth), 100% var(--folder-tab-depth), 100% 100%, 0 100%);
       }
@@ -318,8 +321,8 @@ const ArchiveCategoryTabs = ({
       .archive-folder-card--responsive .archive-folder-index--responsive {
         position: absolute;
         left: clamp(1.25rem, 4vw, 2rem);
-        top: clamp(0.85rem, 2.4vw, 1.15rem);
-        font-size: clamp(0.82rem, 2.25vw, 1.05rem);
+        top: clamp(0.42rem, 1.5vw, 0.7rem);
+        font-size: clamp(0.68rem, 1.9vw, 0.85rem);
       }
 
       .archive-folder-card--responsive:first-child {
@@ -353,86 +356,96 @@ const ArchiveCategoryTabs = ({
       .archive-folder-title {
         position: relative;
         z-index: 2;
-        padding-top: clamp(1.05rem, 3.4vw, 1.45rem);
-        font-size: clamp(1.45rem, 5.5vw, 2.15rem);
+        padding-top: clamp(0.85rem, 2.7vw, 1.1rem);
+        font-size: clamp(1.05rem, 4.2vw, 1.65rem);
       }
 
       @media (max-width: 420px) {
         .archive-folder-card--responsive {
-          --folder-tab-depth: 1.5rem;
+          --folder-tab-depth: 1rem;
           width: calc(100% + 4rem);
         }
 
         .archive-folder-title {
-          padding-top: 1rem;
-          font-size: clamp(1.35rem, 5.7vw, 1.85rem);
+          padding-top: 0.8rem;
+          font-size: clamp(1rem, 4.3vw, 1.38rem);
         }
       }
 
       @media (min-width: 421px) and (max-width: 639px) {
         .archive-tabs-root {
-          margin-top: clamp(2.75rem, 9vw, 3.25rem);
-          height: calc(100svh - clamp(15.3rem, 43vw, 16.1rem));
-          min-height: 20rem;
+          --archive-natural-top: clamp(12rem, calc(8rem + 10vw), 14.5rem);
+          --archive-height: min(33svh, 18.5rem);
+          margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 15rem;
         }
       }
 
       @media (min-width: 640px) and (max-width: 1023px) {
         .archive-folder-card--responsive {
-          --folder-tab-depth: 2.05rem;
+          --folder-tab-depth: 1.45rem;
           width: calc(100% + 10rem);
-          padding-left: clamp(1.7rem, 4vw, 2.6rem);
+          padding-left: clamp(1.35rem, 3.4vw, 2rem);
         }
 
         .archive-folder-card--responsive .archive-folder-index--responsive {
-          left: clamp(1.7rem, 4vw, 2.6rem);
-          top: clamp(1rem, 2vw, 1.25rem);
-          font-size: clamp(0.92rem, 1.75vw, 1.1rem);
+          left: clamp(1.35rem, 3.4vw, 2rem);
+          top: clamp(0.55rem, 1.4vw, 0.8rem);
+          font-size: clamp(0.74rem, 1.35vw, 0.9rem);
         }
 
         .archive-folder-title {
-          padding-top: clamp(1.25rem, 3vw, 1.7rem);
-          font-size: clamp(1.85rem, 4.35vw, 2.45rem);
+          padding-top: clamp(0.9rem, 2.1vw, 1.2rem);
+          font-size: clamp(1.25rem, 3.1vw, 1.8rem);
         }
       }
 
       @media (min-width: 640px) and (max-width: 819px) {
         .archive-tabs-root {
-          margin-top: clamp(8rem, 18vw, 10.5rem);
-          height: calc(100svh - clamp(23rem, 42vw, 25.5rem));
-          min-height: 20rem;
+          --archive-natural-top: clamp(12rem, calc(8rem + 10vw), 14.5rem);
+          --archive-height: min(33svh, 18.5rem);
+          margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 15rem;
         }
       }
 
       @media (min-width: 820px) and (max-width: 1023px) {
         .archive-tabs-root {
-          margin-top: clamp(10rem, 22vw, 12.5rem);
-          height: calc(100svh - clamp(25rem, 48vw, 27rem));
-          min-height: 20rem;
+          --archive-natural-top: clamp(13rem, calc(8rem + 10vw), 15rem);
+          --archive-height: min(33svh, 18.5rem);
+          margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 15rem;
         }
       }
 
       @media (max-height: 720px) and (max-width: 1023px) {
         .archive-tabs-root {
-          margin-top: clamp(2rem, 7vw, 3rem);
-          height: calc(100svh - clamp(12.8rem, calc(9.5rem + 10vw), 16.75rem));
-          min-height: 19rem;
+          --archive-height: min(33svh, 15rem);
+          margin-top: max(1rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 12.5rem;
         }
 
         .archive-folder-card--responsive {
         }
 
         .archive-folder-title {
-          padding-top: clamp(0.9rem, 3vw, 1.25rem);
-          font-size: clamp(1.28rem, 4.8vw, 2rem);
+          padding-top: clamp(0.75rem, 2.4vw, 1rem);
+          font-size: clamp(0.98rem, 3.8vw, 1.45rem);
         }
       }
 
       @media (min-width: 768px) {
         .archive-tabs-root {
-          margin-top: 0;
-          height: calc(100svh - clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem));
-          min-height: 30rem;
+          --archive-natural-top: clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem);
+          --archive-height: min(33svh, 19rem);
+          --archive-tab-depth: clamp(1.2rem, 1.6vw, 1.7rem);
+          margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 15rem;
         }
 
         .archive-folder-stage--responsive {
@@ -442,9 +455,11 @@ const ArchiveCategoryTabs = ({
 
       @media (min-width: 768px) and (max-width: 1023px) {
         .archive-tabs-root {
-          margin-top: clamp(9.5rem, 22vw, 13.5rem);
-          height: calc(100svh - clamp(24.5rem, 48vw, 28.5rem));
-          min-height: 20rem;
+          --archive-natural-top: clamp(13rem, calc(8rem + 10vw), 15rem);
+          --archive-height: min(33svh, 18.5rem);
+          margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
+          height: var(--archive-height);
+          min-height: 15rem;
         }
       }
     `}</style>
