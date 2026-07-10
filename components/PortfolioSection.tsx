@@ -302,7 +302,9 @@ const ArchiveCategoryTabs = ({
         flex-direction: column;
         align-items: stretch;
         overflow: hidden;
+        right: -0.5rem;
         bottom: 0;
+        width: calc(100% + 0.5rem);
         height: 100%;
       }
 
@@ -363,12 +365,18 @@ const ArchiveCategoryTabs = ({
       @media (max-width: 420px) {
         .archive-folder-card--responsive {
           --folder-tab-depth: 1rem;
-          width: calc(100% + 4rem);
+          width: calc(100% + 8rem);
         }
 
         .archive-folder-title {
           padding-top: 0.8rem;
           font-size: clamp(1rem, 4.3vw, 1.38rem);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .archive-tabs-root {
+          width: calc(100vw + 0.5rem);
         }
       }
 
