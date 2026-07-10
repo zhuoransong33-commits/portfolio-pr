@@ -16,7 +16,8 @@ export interface EducationPageContent {
 export const EDUCATION_DATA: Record<Language, EducationPageContent> = {
   zh: {
     title: '关于我',
-    about: '环境设计本科在读，具备数字媒体艺术与视觉设计基础，熟悉空间规划、视觉表达、影像后期与前端应用开发。正在寻找设计、视觉传播、数字媒体或相关方向的实习机会。',
+    about:
+      '本科毕业于南通理工学院环境设计专业，专科毕业于南京工业职业技术大学数字媒体艺术专业。\n\n在五年来的莘莘学业的艺术熏陶和自己对于美的学习中，目前有自己对于设计和美的初步理解，在学习和生活中也逐渐具备数字媒体艺术与视觉设计，熟悉空间规划、视觉表达、影像后期与前端应用开发。\n\n正在寻找设计、视觉传播、数字媒体或相关方向的学习提升的机会。\n\n让生活的灵感碰撞，让属于人的美学继续。',
     openToWork: '正在寻找实习机会',
     viewHonorsLabel: '查看荣誉与奖项',
     honorsTitle: '荣誉与奖项',

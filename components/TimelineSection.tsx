@@ -526,9 +526,13 @@ const ProfileContent = ({ profileText, contactRows }: { profileText: string; con
       />
     </div>
     <div>
-      <p className="font-sans text-[clamp(0.96rem,1.28vw,1.48rem)] font-normal leading-[1.55] tracking-[-0.01em] text-black/78">
-        {profileText}
-      </p>
+      <div className="font-sans text-[clamp(0.96rem,1.28vw,1.48rem)] font-normal leading-[1.5] tracking-[-0.01em] text-justify text-black/78 [text-align-last:left]">
+        {profileText.split(/\n+/).map((paragraph) => (
+          <p key={paragraph} className="mb-2 indent-[2em] last:mb-0">
+            {paragraph}
+          </p>
+        ))}
+      </div>
       <div className="mt-16 border-t border-dotted border-black/35">
         {contactRows.map(([key, value]) => (
           <div key={key} className="grid grid-cols-[8rem_minmax(0,1fr)] border-b border-dotted border-black/25 py-3">
