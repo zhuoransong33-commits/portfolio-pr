@@ -169,12 +169,12 @@ const ArchiveCategoryTabs = ({
         const isHovered = hoveredArchive === cat.id;
         const isDimmed = hoveredArchive !== null && hoveredArchive !== cat.id;
         const layout = {
-          [Category.PHOTO]: { left: '0%', width: '50%', top: '0%', height: '34%', zIndex: 41, delay: '260ms', tabStart: '47%' },
-          [PHOTO_COLLECTION_CATEGORY]: { left: '50%', width: '50%', top: '0%', height: '34%', zIndex: 42, delay: '300ms', tabStart: '47%' },
-          [Category.VIDEO]: { left: '0%', width: '50%', top: '33%', height: '34%', zIndex: 51, delay: '180ms', tabStart: '47%' },
-          [Category.DESIGN]: { left: '50%', width: '50%', top: '33%', height: '34%', zIndex: 52, delay: '220ms', tabStart: '47%' },
-          [Category.ENVIRONMENT]: { left: '0%', width: '50%', top: '66%', height: '34%', zIndex: 61, delay: '80ms', tabStart: '47%' },
-          [BBQ_CATEGORY]: { left: '50%', width: '50%', top: '66%', height: '34%', zIndex: 62, delay: '120ms', tabStart: '47%' },
+          [Category.PHOTO]: { left: '0%', width: '52%', top: '0%', height: '38%', zIndex: 41, delay: '260ms', tabStart: '47%' },
+          [PHOTO_COLLECTION_CATEGORY]: { left: '49.5%', width: '50.5%', top: '0%', height: '38%', zIndex: 42, delay: '300ms', tabStart: '47%' },
+          [Category.VIDEO]: { left: '0%', width: '39.5%', top: '31%', height: '38%', zIndex: 51, delay: '180ms', tabStart: '47%' },
+          [Category.DESIGN]: { left: '37.7%', width: '62.3%', top: '31%', height: '38%', zIndex: 52, delay: '220ms', tabStart: '47%' },
+          [Category.ENVIRONMENT]: { left: '0%', width: '52%', top: '62%', height: '38%', zIndex: 61, delay: '80ms', tabStart: '47%' },
+          [BBQ_CATEGORY]: { left: '49.5%', width: '50.5%', top: '62%', height: '38%', zIndex: 62, delay: '120ms', tabStart: '47%' },
         }[cat.id];
 
         return (
@@ -275,7 +275,7 @@ const ArchiveCategoryTabs = ({
       .archive-tabs-root {
         --archive-natural-top: clamp(12rem, calc(8rem + 10vw), 14.5rem);
         --archive-height: min(33svh, 18.5rem);
-        --archive-tab-depth: clamp(1rem, 3.6vw, 1.45rem);
+        --archive-tab-depth: clamp(0.95rem, 3.2vw, 1.25rem);
         margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
         height: var(--archive-height);
         min-height: 15rem;
@@ -442,7 +442,7 @@ const ArchiveCategoryTabs = ({
         .archive-tabs-root {
           --archive-natural-top: clamp(14.6rem, calc(10.5rem + 7vw), 19.1rem);
           --archive-height: min(33svh, 19rem);
-          --archive-tab-depth: clamp(1.2rem, 1.6vw, 1.7rem);
+          --archive-tab-depth: clamp(1.05rem, 1.25vw, 1.25rem);
           margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
           height: var(--archive-height);
           min-height: 15rem;
