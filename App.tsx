@@ -401,15 +401,15 @@ function App() {
         );
       case 'contact':
         return (
-           <div className="pt-32 w-full max-w-5xl mx-auto text-center animate-fade-in px-4">
-              <h1 className="text-[12vw] font-black mb-12 leading-none text-black dark:text-white transition-colors duration-300">
+           <div className="pt-10 md:pt-14 w-full max-w-5xl mx-auto text-center animate-fade-in px-4">
+              <h1 className="text-[12vw] font-black mb-8 leading-none text-black dark:text-white transition-colors duration-300">
                 {content.hello}
               </h1>
-              <p className="text-3xl text-gray-500 dark:text-gray-400 mb-20 max-w-3xl mx-auto leading-relaxed font-medium transition-colors duration-300">
+              <p className="text-3xl text-gray-500 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed font-medium transition-colors duration-300">
                 {content.intro}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
                  {/* Email */}
                   <div className="block p-12 border-2 border-gray-100 dark:border-gray-800 rounded-[2rem] group cursor-default hover:border-orange-500 transition-colors duration-300">
                      <Mail size={48} className="mx-auto mb-6 text-gray-400 group-hover:text-orange-500 transition-colors duration-300" />
@@ -423,8 +423,7 @@ function App() {
 
                  {/* Socials - WeChat */}
                  <div 
-                    className="block p-12 border-2 border-gray-100 dark:border-gray-800 rounded-[2rem] hover:border-[#07C160] transition-colors duration-300 group cursor-pointer relative"
-                    onClick={() => window.open('https://mp.weixin.qq.com/s/MD5T-BsAgUi9yUo6ISY1CA', '_blank')}
+                    className="block p-12 border-2 border-gray-100 dark:border-gray-800 rounded-[2rem] hover:border-[#07C160] transition-colors duration-300 group cursor-default relative"
                     onMouseEnter={(e) => {
                        const tooltip = document.getElementById('wechat-tooltip');
                        if (tooltip) {
@@ -465,8 +464,8 @@ function App() {
                        style={{ top: 0, left: 0 }}
                     >
                        <p className="text-sm font-bold text-black dark:text-white opacity-80 px-4 text-center">
-                          Click to view profile<br/>
-                          <span className="text-xs opacity-50 font-mono">mp.weixin.qq.com</span>
+                          WeChat ID<br/>
+                          <span className="text-xs opacity-50 font-mono">{content.socials?.wechat || 'Lun3cy'}</span>
                        </p>
                     </div>
                  </div>

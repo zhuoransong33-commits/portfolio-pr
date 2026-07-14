@@ -516,7 +516,7 @@ const SkillsetList = ({ items }: { items: string[] }) => (
 
 const ProfileContent = ({ profileText, contactRows }: { profileText: string; contactRows: [string, string][] }) => (
   <div className="grid gap-5 md:grid-cols-[13rem_minmax(0,1fr)]">
-    <div className="aspect-[4/5] overflow-hidden border border-dotted border-black/30 bg-[#f5f5f2]">
+    <div className="mx-auto w-full max-w-[10rem] aspect-[4/5] overflow-hidden border border-dotted border-black/30 bg-[#f5f5f2] md:mx-0 md:max-w-none">
       <img
         src={thumbnailPath('/works/local/profile/id-photo.jpg')}
         alt="Zhuoran Song portrait"

@@ -350,7 +350,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-[minmax(18rem,0.34fr)_minmax(0,1fr)] xl:grid-cols-[minmax(20rem,0.32fr)_minmax(0,0.52fr)_minmax(14rem,0.2fr)] gap-5 md:gap-8 px-5 md:px-10 lg:px-[4vw] py-6 md:py-8 flex-1 min-h-0">
+                  <div className="grid grid-cols-1 lg:grid-cols-[minmax(18rem,0.3fr)_minmax(0,0.7fr)] gap-5 md:gap-8 px-5 md:px-10 lg:px-[4vw] py-6 md:py-8 flex-1 min-h-0">
                     <div className="font-mono text-xs md:text-sm uppercase lg:max-w-[52ch] overflow-hidden">
                       <p className="leading-[2.05] md:leading-[2.15] [text-indent:2em]">
                         {folder.description}
@@ -367,9 +367,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
 
                     <button
                       onClick={() => handleFolderClick(folder.category)}
-                      className="block w-full min-w-0 min-h-[220px] lg:min-h-0 h-full text-left overflow-hidden bg-black/10"
+                      className="block w-full min-w-0 min-h-[12rem] self-start aspect-video text-left overflow-hidden bg-black/10"
                     >
-                      <div className="h-full min-h-[220px] overflow-hidden">
+                      <div className="h-full overflow-hidden">
                         <img
                           src={folder.image}
                           alt={folder.title}
@@ -379,24 +379,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
                       </div>
                     </button>
 
-                    <div className="hidden xl:flex flex-col gap-6 min-w-0">
-                      <div className="flex overflow-hidden bg-black/10 py-2 font-mono text-xs md:text-sm whitespace-nowrap">
-                        <div className="animate-[marquee_18s_linear_infinite] flex gap-10 pr-10">
-                          {[...folder.tags, ...folder.tags, ...folder.tags].map((tag, tagIndex) => (
-                            <span key={`${tag}-${tagIndex}`}>{tag}</span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex-1 min-h-[10rem] bg-[repeating-linear-gradient(135deg,rgba(0,0,0,0.08)_0,rgba(0,0,0,0.08)_1px,transparent_1px,transparent_12px)]" />
-
-                      <button
-                        onClick={() => onNavigate('contact')}
-                        className="self-start font-mono text-xs uppercase tracking-[0.2em] border border-current px-4 py-3 hover:bg-black hover:text-white transition-colors"
-                      >
-                        {contactContent.contactLabel}
-                      </button>
-                    </div>
                   </div>
 
                   {isLast && (

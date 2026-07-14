@@ -11,8 +11,8 @@ import { ArrowUpRight, X, Github, ExternalLink, ChevronLeft, ChevronRight, Play 
 const BBQ_CATEGORY = 'bbq';
 const PHOTO_COLLECTION_CATEGORY = 'photo-collection';
 
-const isPhotoCollectionProject = (project: { category?: string; id?: string }) =>
-  project.category === PHOTO_COLLECTION_CATEGORY || String(project.id || '').startsWith('photo-collection');
+const usesPhotoAlbumCoverPreview = (project: { id?: string }) =>
+  project.id === 'photo-collection-01';
 
 const PhotoAlbumCoverPreview = ({ compact = false }: { compact?: boolean }) => (
   <div className="h-full w-full bg-white text-black">
@@ -1444,7 +1444,7 @@ const CategoryArchiveDetail = ({
                                   {language === 'zh' ? '项目占位' : 'Project Placeholder'}
                                 </span>
                               </div>
-                            ) : isPhotoCollectionProject(project) ? (
+                            ) : usesPhotoAlbumCoverPreview(project) ? (
                               <PhotoAlbumCoverPreview compact />
                             ) : (
                               <img
@@ -1615,7 +1615,7 @@ const CategoryArchiveDetail = ({
                   </div>
 
                   <div className="relative h-28 md:h-full min-h-[7rem] overflow-hidden bg-black">
-                    {isPhotoCollectionProject(project) ? (
+                    {usesPhotoAlbumCoverPreview(project) ? (
                       <PhotoAlbumCoverPreview compact />
                     ) : image ? (
                       <img
@@ -2001,7 +2001,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ language, ex
             <>
                   {/* Image container */}
                   <div className="w-full aspect-[4/3] bg-gray-100 dark:bg-gray-800 mb-6 overflow-hidden rounded-2xl relative shadow-none border border-transparent transition-all duration-500 group-hover:shadow-2xl dark:group-hover:shadow-none dark:group-hover:border-white/20 transform-gpu">
-                    {isPhotoCollectionProject(project) ? (
+                    {usesPhotoAlbumCoverPreview(project) ? (
                       <PhotoAlbumCoverPreview compact />
                     ) : project.image && !project.image.includes('picsum') ? (
                       <div className="relative h-full w-full">
