@@ -401,29 +401,29 @@ function App() {
         );
       case 'contact':
         return (
-           <div className="pt-10 md:pt-14 w-full max-w-5xl mx-auto text-center animate-fade-in px-4">
-              <h1 className="text-[12vw] font-black mb-8 leading-none text-black dark:text-white transition-colors duration-300">
+           <div className="mx-auto w-full max-w-5xl animate-fade-in px-5 pt-6 text-center md:px-8 md:pt-10">
+              <h1 className="mb-5 text-[clamp(4.5rem,9vw,8rem)] font-black leading-[0.88] tracking-[-0.055em] text-black transition-colors duration-300 dark:text-white">
                 {content.hello}
               </h1>
-              <p className="text-3xl text-gray-500 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed font-medium transition-colors duration-300">
+              <p className="mx-auto mb-12 max-w-2xl text-lg font-medium leading-relaxed text-gray-500 transition-colors duration-300 dark:text-gray-400 md:mb-16 md:text-2xl">
                 {content.intro}
               </p>
 
-              <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="contact-directory mx-auto grid max-w-3xl grid-cols-1 md:grid-cols-2">
                  {/* Email */}
-                  <div className="block p-12 border-2 border-gray-100 dark:border-gray-800 rounded-[2rem] group cursor-default hover:border-orange-500 transition-colors duration-300">
-                     <Mail size={48} className="mx-auto mb-6 text-gray-400 group-hover:text-orange-500 transition-colors duration-300" />
-                     <h3 className="text-2xl font-bold mb-2 text-black dark:text-white transition-colors duration-300">
+                  <div className="contact-directory-item group flex min-h-52 cursor-default flex-col items-center justify-center px-6 py-9 md:min-h-60 md:px-10">
+                     <Mail size={32} strokeWidth={1.6} className="mb-5 text-gray-400 transition-colors duration-300 group-hover:text-black dark:group-hover:text-white" />
+                     <h3 className="mb-2 text-lg font-bold text-black transition-colors duration-300 dark:text-white md:text-xl">
                        {content.emailMeLabel}
                      </h3>
-                     <p className="text-lg opacity-70 text-gray-500 dark:text-gray-400 transition-colors duration-300 select-text">
+                     <p className="select-text text-sm text-gray-500 transition-colors duration-300 dark:text-gray-400 md:text-base">
                        {content.email}
                      </p>
                   </div>
 
                  {/* Socials - WeChat */}
                  <div 
-                    className="block p-12 border-2 border-gray-100 dark:border-gray-800 rounded-[2rem] hover:border-[#07C160] transition-colors duration-300 group cursor-default relative"
+                    className="contact-directory-item group relative flex min-h-52 cursor-default flex-col items-center justify-center px-6 py-9 md:min-h-60 md:px-10"
                     onMouseEnter={(e) => {
                        const tooltip = document.getElementById('wechat-tooltip');
                        if (tooltip) {
@@ -449,18 +449,18 @@ function App() {
                        }
                     }}
                  >
-                    <MessageSquare size={48} className="mx-auto mb-6 text-gray-400 group-hover:text-[#07C160] transition-colors duration-300" />
-                    <h3 className="text-2xl font-bold mb-2 text-black dark:text-white transition-colors duration-300">
+                    <MessageSquare size={32} strokeWidth={1.6} className="mb-5 text-gray-400 transition-colors duration-300 group-hover:text-black dark:group-hover:text-white" />
+                    <h3 className="mb-2 text-lg font-bold text-black transition-colors duration-300 dark:text-white md:text-xl">
                       {language === 'zh' ? '微信' : 'WeChat'}
                     </h3>
-                    <p className="text-lg opacity-70 text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                    <p className="text-sm text-gray-500 transition-colors duration-300 dark:text-gray-400 md:text-base">
                       {content.socials?.wechat || 'Lun3cy'}
                     </p>
                     
                     {/* Glassmorphism Tooltip */}
                     <div 
                        id="wechat-tooltip"
-                       className="absolute z-50 w-64 h-32 bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/40 dark:border-white/10 rounded-2xl shadow-2xl pointer-events-none transition-all duration-200 opacity-0 transform scale-95 translate-y-2 overflow-hidden flex items-center justify-center"
+                       className="pointer-events-none absolute z-50 flex h-28 w-56 translate-y-2 scale-95 items-center justify-center overflow-hidden border border-black/15 bg-white/90 opacity-0 shadow-[0_16px_40px_rgba(23,23,23,0.14)] backdrop-blur-md transition-all duration-200 dark:border-white/20 dark:bg-[#171717]/95"
                        style={{ top: 0, left: 0 }}
                     >
                        <p className="text-sm font-bold text-black dark:text-white opacity-80 px-4 text-center">
@@ -487,7 +487,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans selection:bg-black dark:selection:bg-white selection:text-white dark:selection:text-black overflow-x-clip transition-colors duration-300">
+    <div className="min-h-[100dvh] overflow-x-clip bg-[#f7f7f5] font-sans text-[#171717] transition-colors duration-300 dark:bg-[#121212] dark:text-[#f7f7f5]">
+      <span id="nav-scroll-sentinel" aria-hidden="true" className="pointer-events-none absolute left-0 top-8 h-px w-px" />
       
       {/* Dynamic Navigation */}
       <Sidebar 

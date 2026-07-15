@@ -138,7 +138,7 @@ export const EDUCATION_DATA: Record<Language, EducationPageContent> = {
     honors: {
       scholarships: [
         '2023 National Encouragement Scholarship',
-        'Nanjing Ornamental Stone Gallery University–Enterprise Spatial Design Competition | RMB 10,000 Project Award',
+        'Nanjing Ornamental Stone Gallery University-Enterprise Spatial Design Competition | RMB 10,000 Project Award',
       ],
       titles: [
         'President of the Photography Club',
@@ -163,7 +163,7 @@ export const EDUCATION_DATA: Record<Language, EducationPageContent> = {
         {
           level: 'University / Project',
           awards: [
-            'Second Prize | Nanjing Ornamental Stone Gallery University–Enterprise Spatial Design Competition (Faculty Division)',
+            'Second Prize | Nanjing Ornamental Stone Gallery University-Enterprise Spatial Design Competition (Faculty Division)',
           ],
         },
       ],

@@ -23,7 +23,7 @@ export const HOME_DATA: Record<Language, HomeContent> = {
     ],
     intro: "从未失去探索明天的勇气，始终保持对世界的好奇。",
     selectedWorks: "精选作品",
-    years: "[ 2021 — 2026 ]"
+    years: "[ 2021 - 2026 ]"
   },
   en: {
     heroItems: [
@@ -34,6 +34,6 @@ export const HOME_DATA: Record<Language, HomeContent> = {
     ],
     intro: "Never lose the courage to explore tomorrow, always maintain curiosity about the world.",
     selectedWorks: "Selected Works",
-    years: "[ 2021 — 2026 ]"
+    years: "[ 2021 - 2026 ]"
   }
 };

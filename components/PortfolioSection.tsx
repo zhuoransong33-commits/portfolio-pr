@@ -169,12 +169,12 @@ const ArchiveCategoryTabs = ({
         const isHovered = hoveredArchive === cat.id;
         const isDimmed = hoveredArchive !== null && hoveredArchive !== cat.id;
         const layout = {
-          [Category.PHOTO]: { left: '0%', width: '52%', top: '0%', height: '38%', zIndex: 41, delay: '260ms', tabStart: '47%' },
-          [PHOTO_COLLECTION_CATEGORY]: { left: '49.5%', width: '50.5%', top: '0%', height: '38%', zIndex: 42, delay: '300ms', tabStart: '47%' },
-          [Category.VIDEO]: { left: '0%', width: '39.5%', top: '31%', height: '38%', zIndex: 51, delay: '180ms', tabStart: '47%' },
-          [Category.DESIGN]: { left: '37.7%', width: '62.3%', top: '31%', height: '38%', zIndex: 52, delay: '220ms', tabStart: '47%' },
-          [Category.ENVIRONMENT]: { left: '0%', width: '52%', top: '62%', height: '38%', zIndex: 61, delay: '80ms', tabStart: '47%' },
-          [BBQ_CATEGORY]: { left: '49.5%', width: '50.5%', top: '62%', height: '38%', zIndex: 62, delay: '120ms', tabStart: '47%' },
+          [Category.PHOTO]: { left: '0%', width: '52%', top: '0%', height: '39%', zIndex: 41, delay: '260ms', tabStart: '47%' },
+          [PHOTO_COLLECTION_CATEGORY]: { left: '49.5%', width: '50.5%', top: '0%', height: '39%', zIndex: 42, delay: '300ms', tabStart: '47%' },
+          [Category.VIDEO]: { left: '0%', width: '39.5%', top: '30.5%', height: '39%', zIndex: 51, delay: '180ms', tabStart: '47%' },
+          [Category.DESIGN]: { left: '37.7%', width: '62.3%', top: '30.5%', height: '39%', zIndex: 52, delay: '220ms', tabStart: '47%' },
+          [Category.ENVIRONMENT]: { left: '0%', width: '52%', top: '61%', height: '39%', zIndex: 61, delay: '80ms', tabStart: '47%' },
+          [BBQ_CATEGORY]: { left: '49.5%', width: '50.5%', top: '61%', height: '39%', zIndex: 62, delay: '120ms', tabStart: '47%' },
         }[cat.id];
 
         return (
@@ -191,18 +191,19 @@ const ArchiveCategoryTabs = ({
             onMouseEnter={() => setHoveredArchive(cat.id)}
             onFocus={() => setHoveredArchive(cat.id)}
             onBlur={() => setHoveredArchive(null)}
-            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.15rem,2.1vw,2.35rem)] pt-[clamp(0.45rem,0.85vw,0.8rem)] pb-2 transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
+            className="archive-folder-card group absolute block overflow-hidden text-left px-[clamp(1.15rem,2.1vw,2.35rem)] pt-[clamp(0.45rem,0.85vw,0.8rem)] pb-2 ease-out will-change-transform"
             style={{
               left: layout.left,
               width: layout.width,
               top: layout.top,
-              height: layout.height,
+              height: isHovered ? `calc(${layout.height} + var(--archive-hover-rise))` : layout.height,
               zIndex: layout.zIndex,
               backgroundColor: isDimmed ? '#f4f4f2' : cat.color,
               color: isDimmed ? 'rgba(24, 24, 24, 0.16)' : '#181818',
               filter: isDimmed ? 'grayscale(1) saturate(0) brightness(1.05)' : 'none',
-              transform: isHovered ? 'translate3d(0, -0.35rem, 0)' : 'translate3d(0, 0, 0)',
-              clipPath: `polygon(0 0, ${layout.tabStart} 0, calc(${layout.tabStart} + var(--archive-tab-depth)) var(--archive-tab-depth), 100% var(--archive-tab-depth), 100% 100%, 0 100%)`,
+              transform: isHovered ? 'translate3d(0, calc(-1 * var(--archive-hover-rise)), 0)' : 'translate3d(0, 0, 0)',
+              borderTopLeftRadius: isHovered ? '0.8rem' : '0.45rem',
+              clipPath: `polygon(0 0, ${layout.tabStart} 0, calc(${layout.tabStart} + ${isHovered ? 'var(--archive-tab-depth-active)' : 'var(--archive-tab-depth)'}) ${isHovered ? 'var(--archive-tab-depth-active)' : 'var(--archive-tab-depth)'}, 100% ${isHovered ? 'var(--archive-tab-depth-active)' : 'var(--archive-tab-depth)'}, 100% 100%, 0 100%)`,
               animation: `archiveFolderRise 620ms cubic-bezier(0.16, 1, 0.3, 1) ${layout.delay} both`,
             }}
           >
@@ -243,13 +244,13 @@ const ArchiveCategoryTabs = ({
             onMouseEnter={() => setHoveredArchive(cat.id)}
             onFocus={() => setHoveredArchive(cat.id)}
             onBlur={() => setHoveredArchive(null)}
-            className="archive-folder-card archive-folder-card--responsive group relative overflow-visible text-left transition-[transform,background-color,color,filter] duration-300 ease-out will-change-transform"
+            className="archive-folder-card archive-folder-card--responsive group relative overflow-visible text-left ease-out will-change-transform"
             style={{
               zIndex: index + 20,
               backgroundColor: isDimmed ? '#f4f4f2' : cat.color,
               color: isDimmed ? 'rgba(24, 24, 24, 0.16)' : '#181818',
               filter: isDimmed ? 'grayscale(1) saturate(0) brightness(1.05)' : 'none',
-              transform: isHovered ? 'translate3d(0, -0.25rem, 0)' : 'translate3d(0, 0, 0)',
+              transform: isHovered ? 'translate3d(0, calc(-1 * var(--responsive-hover-rise)), 0)' : 'translate3d(0, 0, 0)',
               animation: `archiveFolderRise 560ms cubic-bezier(0.16, 1, 0.3, 1) ${riseDelay} both`,
             }}
           >
@@ -276,6 +277,8 @@ const ArchiveCategoryTabs = ({
         --archive-natural-top: clamp(12rem, calc(8rem + 10vw), 14.5rem);
         --archive-height: min(33svh, 18.5rem);
         --archive-tab-depth: clamp(0.95rem, 3.2vw, 1.25rem);
+        --archive-tab-depth-active: calc(var(--archive-tab-depth) + 0.18rem);
+        --archive-hover-rise: 0.35rem;
         margin-top: max(2rem, calc(100svh - var(--archive-natural-top) - var(--archive-height)));
         height: var(--archive-height);
         min-height: 15rem;
@@ -287,6 +290,14 @@ const ArchiveCategoryTabs = ({
 
       .archive-folder-card {
         border-top-left-radius: 0.45rem;
+        transition:
+          transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          height 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-radius 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          clip-path 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          background-color 300ms ease,
+          color 300ms ease,
+          filter 300ms ease;
       }
 
       .archive-folder-index {
@@ -311,13 +322,41 @@ const ArchiveCategoryTabs = ({
       .archive-folder-card--responsive {
         --folder-tab-depth: clamp(1rem, 3.6vw, 1.4rem);
         --folder-tab-start: 52%;
+        --folder-overlap: clamp(0.26rem, 0.9vw, 0.38rem);
+        --responsive-hover-rise: 0.25rem;
         width: calc(100% + 8rem);
         max-width: none;
         min-height: 0;
         flex: 1 1 0;
         padding: clamp(0.38rem, 1.4vw, 0.65rem) clamp(1rem, 3.6vw, 1.6rem) clamp(0.35rem, 1.6vw, 0.7rem);
-        margin-top: 0;
+        margin-top: calc(-1 * var(--folder-overlap));
+        border-top-left-radius: 0.45rem;
         clip-path: none;
+      }
+
+      .archive-folder-card--responsive::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(-1 * var(--responsive-hover-rise));
+        z-index: 0;
+        height: var(--responsive-hover-rise);
+        background: inherit;
+        opacity: 0;
+        transition: opacity 180ms ease-out;
+        pointer-events: none;
+      }
+
+      .archive-folder-card--responsive:hover,
+      .archive-folder-card--responsive:focus-visible {
+        --folder-tab-depth: clamp(1.12rem, 4vw, 1.55rem);
+        border-top-left-radius: 0.8rem;
+      }
+
+      .archive-folder-card--responsive:hover::before,
+      .archive-folder-card--responsive:focus-visible::before {
+        opacity: 1;
       }
 
       .archive-folder-card--responsive::after {
@@ -330,6 +369,9 @@ const ArchiveCategoryTabs = ({
         height: var(--folder-tab-depth);
         background: var(--folder-underlay, transparent);
         clip-path: polygon(0 0, 100% 0, 100% 100%, var(--folder-tab-depth) 100%);
+        transition:
+          height 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          clip-path 300ms cubic-bezier(0.16, 1, 0.3, 1);
         pointer-events: none;
       }
 

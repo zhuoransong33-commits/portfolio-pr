@@ -27,31 +27,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const isHeroNav = activeTab === 'dashboard' && !isScrolled;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 32);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const sentinel = document.getElementById('nav-scroll-sentinel');
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsScrolled(!entry.isIntersecting);
+    });
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   const items = NAV_ITEMS[language];
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isScrolled ? 'pt-4 md:pt-6' : 'pt-4 md:pt-6'}`}>
+    <div className="fixed left-0 right-0 top-0 z-50 flex justify-center pt-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:pt-6">
       <nav 
         className={`
           flex min-w-0 items-center justify-between 
-          transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+          transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isScrolled 
-            ? 'w-[96vw] md:w-auto gap-[clamp(0.5rem,2.6vw,3rem)] bg-white/90 dark:bg-black/90 backdrop-blur-md border border-gray-200 dark:border-gray-800 rounded-2xl md:rounded-full px-[clamp(0.6rem,2.4vw,2.5rem)] py-3 md:py-4 shadow-pill dark:shadow-pill-dark' 
+            ? 'w-[96vw] md:w-auto gap-[clamp(0.5rem,2.6vw,3rem)] bg-[#f7f7f5]/95 dark:bg-[#121212]/95 backdrop-blur-md border border-black/10 dark:border-white/15 rounded-2xl md:rounded-full px-[clamp(0.6rem,2.4vw,2.5rem)] py-3 md:py-4 shadow-pill dark:shadow-pill-dark'
             : 'w-[96vw] gap-[clamp(0.5rem,2.8vw,3rem)] bg-transparent border-transparent shadow-none px-0 py-2 backdrop-blur-none'}
         `}
       >
         
         {/* Logo Left - Text Based */}
         <div 
-          className="cursor-pointer flex items-center gap-2 group shrink-0"
+          className="editorial-action group flex shrink-0 cursor-pointer items-center gap-2"
           onClick={() => setActiveTab('dashboard')}
         >
           <h1 className={`font-black tracking-tighter uppercase transition-all duration-500 ease-in-out leading-none
@@ -64,7 +67,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Links Right */}
-        <div className={`flex min-w-0 items-center transition-all duration-700 overflow-hidden ${isScrolled ? 'gap-[clamp(0.35rem,1.7vw,2rem)]' : 'gap-[clamp(0.3rem,2.1vw,3rem)]'}`}>
+        <div className={`flex min-w-0 items-center overflow-hidden transition-all duration-500 ${isScrolled ? 'gap-[clamp(0.35rem,1.7vw,2rem)]' : 'gap-[clamp(0.3rem,2.1vw,3rem)]'}`}>
           {items.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -72,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
                 className={`
-                  text-[clamp(0.82rem,2.35vw,1.25rem)] font-bold uppercase tracking-wide transition-colors duration-200 relative group whitespace-nowrap
+                  editorial-action relative whitespace-nowrap text-[clamp(0.82rem,2.35vw,1.25rem)] font-bold uppercase tracking-wide
                   ${isHeroNav
                     ? (isActive ? 'text-white' : 'text-white/45 hover:text-white')
                     : (isActive ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white')}
@@ -93,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
              {/* Language Toggle */}
              <button
                onClick={toggleLanguage}
-               className={`p-1 md:p-2 rounded-full transition-colors flex items-center gap-1 ${isHeroNav ? 'text-white hover:bg-white/10' : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+               className={`editorial-action flex items-center gap-1 rounded-full p-1 md:p-2 ${isHeroNav ? 'text-white hover:bg-white/10' : 'text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
                title="Switch Language"
              >
                <Globe size={20} className="md:w-6 md:h-6" />
@@ -103,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
              {/* Theme Toggle */}
              <button 
                onClick={toggleTheme}
-               className={`p-1 md:p-2 rounded-full transition-colors ${isHeroNav ? 'text-white hover:bg-white/10' : 'text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+               className={`editorial-action rounded-full p-1 md:p-2 ${isHeroNav ? 'text-white hover:bg-white/10' : 'text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
                title="Toggle Theme"
              >
                {theme === 'light' ? <Moon size={20} className="md:w-6 md:h-6" /> : <Sun size={20} className="md:w-6 md:h-6" />}
@@ -112,7 +115,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
              {/* Gravity Bonus Toggle */}
              <button 
                onClick={onTriggerGravity}
-               className={`p-1 md:p-2 rounded-full transition-colors ${isHeroNav ? 'text-white hover:bg-red-500/20' : 'text-black dark:text-white hover:bg-red-100 dark:hover:bg-red-900'}`}
+               className={`editorial-action hidden rounded-full p-1 min-[430px]:block md:p-2 ${isHeroNav ? 'text-white hover:bg-white/10' : 'text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10'}`}
                title="Boom!"
              >
                <Bomb size={20} className="md:w-6 md:h-6 hover:text-red-500 transition-colors" />

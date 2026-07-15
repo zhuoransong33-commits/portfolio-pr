@@ -140,7 +140,7 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ language }) =>
     }));
 
     const titles = content.honors.titles.map((item) => ({
-      year: '2021–2026',
+      year: '2021-2026',
       name: item,
       organizer: language === 'zh' ? '校园 / 社区 / 课程' : 'Campus / Community / Course',
     }));
@@ -163,10 +163,10 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ language }) =>
     <section className="about-archive-page relative w-full overflow-x-hidden bg-[#f7f7f5] text-[#1f1f1f] dark:bg-black dark:text-white">
       <div className="relative z-10 px-4 md:px-8 pt-8 md:pt-10">
         <div className="grid min-h-[20svh] md:min-h-[18svh] grid-cols-[1fr_auto] md:grid-cols-[1fr_1fr_1fr] items-start gap-6">
-          <h1 className="font-serif text-[clamp(3.2rem,8vw,8rem)] leading-[0.78] tracking-[-0.08em]">
+          <h1 className="font-serif text-[clamp(3rem,6.5vw,6.4rem)] leading-[0.82] tracking-[-0.065em]">
             {labels.about}
           </h1>
-          <h1 className="font-serif text-[clamp(3.2rem,8vw,8rem)] leading-[0.78] tracking-[-0.08em] text-[#d7d7d4] dark:text-white/18 md:text-center">
+          <h1 className="font-serif text-[clamp(3rem,6.5vw,6.4rem)] leading-[0.82] tracking-[-0.065em] text-[#d7d7d4] dark:text-white/18 md:text-center">
             {labels.me}
           </h1>
           <p className="hidden max-w-sm justify-self-end pt-4 font-mono text-xs uppercase leading-relaxed tracking-[0.16em] text-black/45 dark:text-white/45 md:block">

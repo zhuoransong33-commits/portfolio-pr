@@ -41,7 +41,7 @@ const zhFolders: ArchiveFolder[] = [
     id: 'photo',
     index: '01',
     title: '摄影',
-    year: '2021—2026',
+    year: '2021-2026',
     type: '静态影像作品',
     description: '从高中时期就对摄影有一些兴趣，在大学的时候也学习了专业的摄影相关知识，这里展示了我通过摄影对生活的观察，对美的思考，记录了生活里的点滴...',
     tags: ['纪实摄影', '旅行影像', '视觉观察', '个人档案'],
@@ -54,7 +54,7 @@ const zhFolders: ArchiveFolder[] = [
     id: 'video',
     index: '02',
     title: '动态影像',
-    year: '2022—2026',
+    year: '2022-2026',
     type: '动态影像作品',
     description: '平时的课时作业、专科毕业设计、氛围感实验片段以及在洛阳江湖影视后期中制作的短剧剧集。',
     tags: ['短片', '剪辑', '运动镜头', '叙事影像'],
@@ -67,7 +67,7 @@ const zhFolders: ArchiveFolder[] = [
     id: 'graphic',
     index: '03',
     title: '平面交互',
-    year: '2023—2026',
+    year: '2023-2026',
     type: '视觉设计 / UI 作品',
     description: '包含品牌视觉、信息图表、界面设计和个人视觉系统的平面交互作品。',
     tags: ['品牌视觉', '信息图表', 'UI 设计', 'Figma'],
@@ -80,7 +80,7 @@ const zhFolders: ArchiveFolder[] = [
     id: 'interior',
     index: '04',
     title: '环境 / 室内设计',
-    year: '2021—2026',
+    year: '2021-2026',
     type: '专业方向作品',
     description: '从空间概念、室内表达、材料与模型呈现中整理出的环境设计方向。',
     tags: ['空间设计', '室内设计', '环境设计', '模型表达'],
@@ -123,6 +123,7 @@ const enFolders: ArchiveFolder[] = zhFolders.map((folder) => {
 });
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const visibilityThresholds = Array.from({ length: 101 }, (_, index) => index / 100);
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategorySelect, language }) => {
   const content = HOME_DATA[language];
@@ -135,63 +136,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
   const [landingProgress, setLandingProgress] = useState(0);
   const [outroProgress, setOutroProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement | null>(null);
+  const landingTriggerRef = useRef<HTMLSpanElement | null>(null);
   const outroRef = useRef<HTMLElement | null>(null);
   const folderDockTop = 'clamp(7.5rem, 10vw, 8.75rem)';
 
   useEffect(() => {
-    let frame = 0;
+    const trigger = landingTriggerRef.current;
+    if (!trigger) return;
 
-    const updateProgress = () => {
-      if (!heroRef.current) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      setLandingProgress(0);
+      return;
+    }
 
-      const top = heroRef.current.getBoundingClientRect().top + window.scrollY;
-      const progress = (window.scrollY - top) / Math.max(window.innerHeight, 1);
-      setLandingProgress(clamp(progress, 0, 1));
-    };
+    const observer = new IntersectionObserver(([entry]) => {
+      setLandingProgress(clamp(1 - entry.intersectionRatio, 0, 1));
+    }, { threshold: visibilityThresholds });
 
-    const requestUpdate = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(updateProgress);
-    };
-
-    updateProgress();
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-    };
+    observer.observe(trigger);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    let frame = 0;
+    const outro = outroRef.current;
+    if (!outro) return;
 
-    const updateProgress = () => {
-      if (!outroRef.current) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      setOutroProgress(1);
+      return;
+    }
 
-      const rect = outroRef.current.getBoundingClientRect();
-      const start = window.innerHeight * 0.92;
-      const end = window.innerHeight * 0.18;
-      const progress = (start - rect.top) / Math.max(start - end, 1);
-      setOutroProgress(clamp(progress, 0, 1));
-    };
+    const observer = new IntersectionObserver(([entry]) => {
+      setOutroProgress(clamp(entry.intersectionRatio * 1.35, 0, 1));
+    }, { threshold: visibilityThresholds });
 
-    const requestUpdate = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(updateProgress);
-    };
-
-    updateProgress();
-    window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-    };
+    observer.observe(outro);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -275,9 +257,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
       className="relative left-1/2 w-screen -mt-40 bg-[#121212] text-white animate-fade-in overflow-visible"
       style={{ marginLeft: '-50vw' }}
     >
+      <span
+        ref={landingTriggerRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[100dvh]"
+      />
       <section className="relative bg-[#121212]">
         <section
-          className="sticky top-0 z-0 h-screen overflow-hidden bg-[#121212] px-5 md:px-10 lg:px-[4vw] pt-48 md:pt-56 lg:pt-[19vh] pb-16"
+          className="sticky top-0 z-0 h-[100dvh] overflow-hidden bg-[#121212] px-5 pb-16 pt-48 md:px-10 md:pt-56 lg:px-[4vw] lg:pt-[19vh]"
           style={{
             transform: `translate3d(0, ${landingShift}vh, 0)`,
             opacity: landingOpacity,
@@ -286,7 +273,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
           <div className="max-w-6xl">
             <div className="max-w-6xl">
             <p className="font-mono text-xs md:text-sm uppercase tracking-[0.32em] text-white/50 mb-9 md:mb-12">
-              {language === 'zh' ? '个人作品档案 / 滚动索引' : 'Personal Work Archive / Scroll Index'}
+              {language === 'zh' ? '个人作品档案' : 'Personal Work Archive'}
             </p>
             <h1 className="text-[18vw] md:text-[12vw] lg:text-[8.8vw] leading-[0.82] font-black tracking-[-0.08em] uppercase">
               Zhuoran<br />Song
@@ -301,7 +288,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
 
         {folders.map((folder, index) => {
           const tabLeft = `calc(${index} * clamp(3.15rem, 14vw, 15.4rem))`;
-          const isLast = index === folders.length - 1;
 
           return (
             <article
@@ -381,12 +367,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
 
                   </div>
 
-                  {isLast && (
-                    <div className="absolute z-20 bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 font-mono text-xs uppercase tracking-[0.26em] pointer-events-none rounded-full bg-black/80 text-white px-5 py-3 shadow-2xl">
-                      <span>{language === 'zh' ? '继续滚动' : 'Keep Scrolling'}</span>
-                      <span className="text-3xl leading-none animate-bounce">↓</span>
-                    </div>
-                  )}
                 </div>
               </div>
             </article>
@@ -397,7 +377,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
         <section
           ref={outroRef}
           data-landing-outro
-          className="relative z-0 h-screen overflow-hidden bg-[#121212] text-white"
+          className="relative z-0 h-[100dvh] overflow-hidden bg-[#121212] text-white"
         >
           <div
             className="relative h-full max-w-none px-5 pb-8 pt-40 transition-[opacity,transform] duration-300 ease-out md:px-10 md:pb-10 md:pt-48 lg:px-[4vw] lg:pb-12 lg:pt-[15vh]"
@@ -407,7 +387,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onCategory
             }}
           >
             <p className="font-mono text-xs md:text-sm uppercase tracking-[0.32em] text-white/50 mb-9 md:mb-12">
-              {language === 'zh' ? '个人作品档案 / 滚动索引' : 'Personal Work Archive / Scroll Index'}
+              {language === 'zh' ? '个人作品档案' : 'Personal Work Archive'}
             </p>
             <h2 className="text-[18vw] md:text-[12vw] lg:text-[8.8vw] leading-[0.82] font-black tracking-[-0.08em] uppercase">
               Zhuoran<br />Song

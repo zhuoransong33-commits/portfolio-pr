@@ -41,14 +41,14 @@ export default {
         ],
       },
       colors: {
-        primary: '#000000',
-        secondary: '#666666',
-        bg: '#ffffff',
-        line: '#e5e5e5',
+        primary: '#171717',
+        secondary: '#777773',
+        bg: '#f7f7f5',
+        line: '#d9d9d6',
       },
       boxShadow: {
-        'pill': '0 4px 20px rgba(0,0,0,0.05)',
-        'pill-dark': '0 4px 20px rgba(255,255,255,0.05)',
+        'pill': '0 12px 32px rgba(23,23,23,0.08)',
+        'pill-dark': '0 12px 32px rgba(0,0,0,0.28)',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',

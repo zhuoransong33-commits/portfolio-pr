@@ -5,6 +5,31 @@
 @layer base {
   :root {
     --font-site: "San Francisco", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --site-ink: #171717;
+    --site-paper: #f7f7f5;
+    --site-muted: #777773;
+    --site-line: rgb(23 23 23 / 0.18);
+    --site-focus: #171717;
+    --site-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dark {
+    --site-ink: #f7f7f5;
+    --site-paper: #121212;
+    --site-muted: #a3a39d;
+    --site-line: rgb(247 247 245 / 0.22);
+    --site-focus: #f7f7f5;
+  }
+
+  html {
+    background: var(--site-paper);
+    color-scheme: light;
+    scrollbar-gutter: stable;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   html,
@@ -25,6 +50,63 @@
   h6 {
     font-family: var(--font-site);
   }
+
+  body {
+    min-width: 320px;
+    background: var(--site-paper);
+    color: var(--site-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--site-focus);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: #ffe629;
+    color: #171717;
+  }
+}
+
+@layer components {
+  .editorial-action {
+    transition:
+      color 220ms var(--site-ease),
+      background-color 220ms var(--site-ease),
+      border-color 220ms var(--site-ease),
+      opacity 220ms var(--site-ease),
+      transform 220ms var(--site-ease);
+  }
+
+  .editorial-action:active {
+    transform: translateY(1px);
+  }
+
+  .contact-directory {
+    border-block: 1px solid var(--site-line);
+  }
+
+  .contact-directory-item + .contact-directory-item {
+    border-top: 1px solid var(--site-line);
+  }
+
+  @media (min-width: 768px) {
+    .contact-directory-item + .contact-directory-item {
+      border-top: 0;
+      border-left: 1px solid var(--site-line);
+    }
+  }
 }
 
 /* Hardware acceleration helpers */
@@ -40,19 +122,28 @@
 .vt-page { view-transition-name: page; }
 
 @keyframes vtFadeIn {
-  from { opacity: 0; transform: translateY(6px) scale(0.995); filter: blur(4px); }
-  to   { opacity: 1; transform: none; filter: blur(0); }
+  from { opacity: 0; transform: translateY(6px) scale(0.995); }
+  to   { opacity: 1; transform: none; }
 }
 
 @keyframes vtFadeOut {
-  from { opacity: 1; transform: none; filter: blur(0); }
-  to   { opacity: 0; transform: translateY(-6px) scale(0.995); filter: blur(4px); }
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-6px) scale(0.995); }
 }
 
 ::view-transition-old(page) { animation: vtFadeOut 0.25s ease-in both; }
 ::view-transition-new(page) { animation: vtFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   ::view-transition-old(page),
   ::view-transition-new(page) { animation: none !important; }
 }

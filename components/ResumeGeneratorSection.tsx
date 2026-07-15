@@ -441,7 +441,7 @@ export const ResumeGeneratorSection: React.FC<ResumeGeneratorSectionProps> = ({ 
 
 const Question = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
-    <h3 className="mb-8 text-3xl font-black leading-tight tracking-[-0.03em] text-black dark:text-white md:text-5xl">{title}</h3>
+    <h3 className="mb-8 text-[clamp(2rem,4vw,3.5rem)] font-black leading-[1.05] tracking-[-0.035em] text-black dark:text-white">{title}</h3>
     {children}
   </div>
 );
